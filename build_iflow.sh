@@ -32,10 +32,12 @@ function CHECK_DIR()
 
 function RUN()
 {
+    echo "[gmanager Info] exec command: '$*' ..."
     while [ 0 -eq 0 ]
     do
         $* 
         if [ $? -eq 0 ]; then
+            echo "[iFlow Info] exec command successful: '$*' "
             break;
         else
             echo "[iFlow Warning] exec command failed: '$*' retry..." && sleep 1
