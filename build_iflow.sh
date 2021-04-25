@@ -32,7 +32,7 @@ function CHECK_DIR()
 
 function RUN()
 {
-    echo "[gmanager Info] exec command: '$*' ..."
+    echo "[iFlow Info] exec command: '$*' ..."
     while [ 0 -eq 0 ]
     do
         $* 
