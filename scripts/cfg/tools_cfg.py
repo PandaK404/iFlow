@@ -24,7 +24,7 @@ tool2  = Tools(
         'openroad_1.1.0',
         '../../../iFlow/tools/OpenROAD9295a533/build/src/openroad')
 tool3  = Tools(
-        ('floorplan','tapcell','pdn','gplace','resize','dplace','cts','filler','groute'),   
+        ('floorplan','tapcell','pdn','gplace','resize','dplace','cts','filler','groute','droute'),   
         'openroad_1.2.0',
         '../../../iFlow/tools/OpenROADae191807/build/src/openroad')
 tool4  = Tools(
@@ -39,4 +39,7 @@ tool6  = Tools(
         ('layout',),   
         'klayout_0.26.2',
         '/usr/bin/klayout')
-
+tool7  = Tools(
+        ('floorplan','tapcell','pdn','gplace','resize','dplace','cts','filler','groute'),   
+        'openroad_0.9.0',
+        '../../../iFlow/tools/OpenROAD9295a533/build/src/openroad')
