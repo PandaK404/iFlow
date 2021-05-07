@@ -3,4 +3,5 @@
 !cfg
 !common
 !aes_cipher_top
+!coyote_tc
 !run_flow.py
