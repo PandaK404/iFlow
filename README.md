@@ -151,7 +151,7 @@ run_flow.py -d $design -s layout -f $foundry -t $track -c $corner
 ```
 
 ## 四、Example
-### 1、使用iFlow跑soc_asic_top设计的全流程
+### 1、使用iFlow跑aes_cipher_top设计的全流程
 进入“/iFlow/scripts/”目录，输入命令：
 ```
 ./run_flow.py -d aes_cipher_top -s synth,floorplan,tapcell,pdn,gplace,resize,dplace,cts,filler,groute,droute,layout -f sky130 -t HS -c TYP -v 1.0 -l 1.0
