@@ -23,7 +23,7 @@ IFLOW_TOOLS=$(cd "$(dirname "$0")" && pwd)/tools
 function CHECK_DIR()
 {
     if [ -d $* ] && [ $( ls $* | wc -l ) -gt 0 ]; then
-        echo "[iFlow Info] dir exist and not empty: '$*' skiping..." && return 0
+        echo "[iFlow Info] Check dir '$*' successful, skiping..." && return 0
     else
         rm -rf $*
         return 1
@@ -32,15 +32,15 @@ function CHECK_DIR()
 
 function RUN()
 {
-    echo "[iFlow Info] exec command: '$*' ..."
+    echo "[iFlow Info] Exec '$*' ..."
     while [ 0 -eq 0 ]
     do
         $* 
         if [ $? -eq 0 ]; then
-            echo "[iFlow Info] exec command successful: '$*' "
+            echo "[iFlow Info] Exec '$*' successful"
             break;
         else
-            echo "[iFlow Warning] exec command failed: '$*' retry..." && sleep 1
+            echo "[iFlow Warning] Exec '$*' failed, retry..." && sleep 1
         fi
     done
 }
@@ -121,8 +121,8 @@ echo ""
 echo "************************************"
 echo "[iFlow Info] build checking... "
 if (CHECK_DIR $IFLOW_ROOT/tools/yosys4be891e8) && (CHECK_DIR $IFLOW_ROOT/tools/TritonRoute758cdac) && (CHECK_DIR $IFLOW_ROOT/tools/OpenROAD9295a533) && (CHECK_DIR $IFLOW_ROOT/tools/OpenROADae191807); then
-    echo "[iFlow Info] build successful! "
+    echo "[iFlow Info] Build successful! "
 else
-    echo "[iFlow Info] build failed! "
+    echo "[iFlow Info] Build failed! "
 fi
 echo "************************************"
