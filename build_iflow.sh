@@ -73,7 +73,8 @@ CHECK_DIR $IFLOW_TOOLS/yosys4be891e8 || RUN git clone https://github.com/The-Ope
 RUN cd $IFLOW_TOOLS/yosys4be891e8
 RUN git checkout 4be891e8
 CHECK_DIR $IFLOW_TOOLS/yosys4be891e8/build || RUN mkdir build
-RUN cd build && make -f ../Makefile -j$THREAD_NUM
+RUN cd build 
+RUN make -f ../Makefile -j$THREAD_NUM
 RUN cd $IFLOW_ROOT
 
 # TritonRoute758cdac
@@ -82,7 +83,8 @@ RUN cd $IFLOW_TOOLS/TritonRoute758cdac
 RUN git checkout 758cdac
 CHECK_DIR $IFLOW_TOOLS/TritonRoute758cdac/build || RUN mkdir build
 RUN cd build 
-RUN cmake .. && make -j$THREAD_NUM
+RUN cmake .. 
+RUN make -j$THREAD_NUM
 RUN cd $IFLOW_ROOT
     
 # OpenROAD9295a533
@@ -94,7 +96,9 @@ RUN git submodule update --init --recursive OpenSTA OpenDB flute3 replace ioPlac
 CHECK_DIR $IFLOW_TOOLS/OpenROAD9295a533/src/PDNSim || RUN git clone https://github.com/ZhishengZeng/PDNSim.git PDNSim
 RUN cd $IFLOW_TOOLS/OpenROAD9295a533
 CHECK_DIR $IFLOW_TOOLS/OpenROAD9295a533/build || RUN mkdir build
-RUN cd build && cmake .. && make -j$THREAD_NUM
+RUN cd build 
+RUN cmake .. 
+RUN make -j$THREAD_NUM
 RUN cd $IFLOW_ROOT
 
 # OpenROADae191807
@@ -103,7 +107,9 @@ RUN cd $IFLOW_TOOLS/OpenROADae191807
 RUN git checkout ae191807  
 RUN git submodule update --init --recursive
 CHECK_DIR $IFLOW_TOOLS/OpenROADae191807/build || RUN mkdir build
-RUN cd build && cmake .. && make -j$THREAD_NUM
+RUN cd build 
+RUN cmake .. 
+RUN make -j$THREAD_NUM
 RUN cd $IFLOW_ROOT
 
 echo ""
