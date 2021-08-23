@@ -60,8 +60,13 @@ CHECK_DIR /usr/local/include/lemon ||\
     RUN wget http://lemon.cs.elte.hu/pub/sources/lemon-1.3.1.tar.gz
     RUN tar zxvf lemon-1.3.1.tar.gz
     RUN cd lemon-1.3.1
-    RUN mkdir build && cd build && cmake .. && make -j$THREAD_NUM && sudo make install
-    RUN cd $IFLOW_ROOT && rm -rf lemon-1.3.1 lemon-1.3.1.tar.gz
+    RUN mkdir build 
+    RUN cd build 
+    RUN cmake .. 
+    RUN make -j$THREAD_NUM 
+    RUN sudo make install
+    RUN cd $IFLOW_ROOT 
+    RUN rm -rf lemon-1.3.1 lemon-1.3.1.tar.gz
 }
 
 # update iFlow
