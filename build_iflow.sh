@@ -120,7 +120,7 @@ RUN cd $IFLOW_ROOT
 
 echo ""
 echo "************************************"
-echo "[iFlow Info] build checking... "
+echo "[iFlow Info] Build checking... "
 if (CHECK_DIR $IFLOW_ROOT/tools/yosys4be891e8) && (CHECK_DIR $IFLOW_ROOT/tools/TritonRoute758cdac) && (CHECK_DIR $IFLOW_ROOT/tools/OpenROAD9295a533) && (CHECK_DIR $IFLOW_ROOT/tools/OpenROADae191807); then
     echo "[iFlow Info] Build successful! "
 else
