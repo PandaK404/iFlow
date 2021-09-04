@@ -53,39 +53,39 @@ smic110 = Foundry(
     },
     lef = {
         'tech'      : (
-            '/home/zcn/iFlow/foundry/smic110/lef/scc011u_8lm_1tm_thin_ALPA.lef',
+            '../foundry/smic110/lef/scc011u_8lm_1tm_thin_ALPA.lef',
         ),
         'std,HD'    : (
-            '/home/zcn/iFlow/foundry/smic110/lef/scc011ums_hd_hvt.lef',
-            '/home/zcn/iFlow/foundry/smic110/lef/scc011ums_hd_lvt.lef',
-            '/home/zcn/iFlow/foundry/smic110/lef/scc011ums_hd_rvt.lef'
+            '../foundry/smic110/lef/scc011ums_hd_hvt.lef',
+            '../foundry/smic110/lef/scc011ums_hd_lvt.lef',
+            '../foundry/smic110/lef/scc011ums_hd_rvt.lef'
         ),
         'macro'     : (
-            '/home/zcn/iFlow/foundry/smic110/lef/S011HD1P1024X64M4B0.lef',
-            '/home/zcn/iFlow/foundry/smic110/lef/S011HD1P128X21M2B0.lef',
-            '/home/zcn/iFlow/foundry/smic110/lef/S011HD1P256X8M4B0.lef',
-            '/home/zcn/iFlow/foundry/smic110/lef/S011HD1P512X19M4B0.lef',
-            '/home/zcn/iFlow/foundry/smic110/lef/S011HD1P512X73M2B0.lef',
-            '/home/zcn/iFlow/foundry/smic110/lef/S011HDSP4096X64M8B0.lef',
-            '/home/zcn/iFlow/foundry/smic110/lef/SP013D3WP_V1p7_8MT.lef',
-            '/home/zcn/iFlow/foundry/smic110/lef/S013PLLFN_8m_V1_2_1.lef'
+            '../foundry/smic110/lef/S011HD1P1024X64M4B0.lef',
+            '../foundry/smic110/lef/S011HD1P128X21M2B0.lef',
+            '../foundry/smic110/lef/S011HD1P256X8M4B0.lef',
+            '../foundry/smic110/lef/S011HD1P512X19M4B0.lef',
+            '../foundry/smic110/lef/S011HD1P512X73M2B0.lef',
+            '../foundry/smic110/lef/S011HDSP4096X64M8B0.lef',
+            '../foundry/smic110/lef/SP013D3WP_V1p7_8MT.lef',
+            '../foundry/smic110/lef/S013PLLFN_8m_V1_2_1.lef'
         )
     },
     gds = {
         'std,HD'    : (
-            '/home/zcn/iFlow/foundry/smic110/gds/scc011ums_hd_hvt.gds',
-            '/home/zcn/iFlow/foundry/smic110/gds/scc011ums_hd_lvt.gds',
-            '/home/zcn/iFlow/foundry/smic110/gds/scc011ums_hd_rvt.gds',
+            '../foundry/smic110/gds/scc011ums_hd_hvt.gds',
+            '../foundry/smic110/gds/scc011ums_hd_lvt.gds',
+            '../foundry/smic110/gds/scc011ums_hd_rvt.gds',
         ),
         'macro'     : (
-            '/home/zcn/iFlow/foundry/smic110/gds/S011HD1P1024X64M4B0.gds',
-            '/home/zcn/iFlow/foundry/smic110/gds/S011HD1P128X21M2B0.gds',
-            '/home/zcn/iFlow/foundry/smic110/gds/S011HD1P256X8M4B0.gds',
-            '/home/zcn/iFlow/foundry/smic110/gds/S011HD1P512X19M4B0.gds',
-            '/home/zcn/iFlow/foundry/smic110/gds/S011HD1P512X73M2B0.gds',
-            '/home/zcn/iFlow/foundry/smic110/gds/S011HDSP4096X64M8B0.gds',
-            '/home/zcn/iFlow/foundry/smic110/gds/SP013D3WP_V1p7_8MT.gds',
-            '/home/zcn/iFlow/foundry/smic110/gds/S013PLLFN_V1.5.2_1P8M_partial.gds'
+            '../foundry/smic110/gds/S011HD1P1024X64M4B0.gds',
+            '../foundry/smic110/gds/S011HD1P128X21M2B0.gds',
+            '../foundry/smic110/gds/S011HD1P256X8M4B0.gds',
+            '../foundry/smic110/gds/S011HD1P512X19M4B0.gds',
+            '../foundry/smic110/gds/S011HD1P512X73M2B0.gds',
+            '../foundry/smic110/gds/S011HDSP4096X64M8B0.gds',
+            '../foundry/smic110/gds/SP013D3WP_V1p7_8MT.gds',
+            '../foundry/smic110/gds/S013PLLFN_V1.5.2_1P8M_partial.gds'
         )
     }
 )
@@ -97,61 +97,61 @@ smic55 = Foundry(
     name='smic55',
     lib = {
         'std,HD,MAX': (
-            '/home/zcn/iFlow/foundry/smic55/lib/scc55nll_hd_lvt_ss_v1p08_125c_ccs.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/scc55nll_hd_hvt_ss_v1p08_125c_ccs.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/scc55nll_hd_rvt_ss_v1p08_125c_ccs.lib'
+            '../foundry/smic55/lib/scc55nll_hd_lvt_ss_v1p08_125c_ccs.lib',
+            '../foundry/smic55/lib/scc55nll_hd_hvt_ss_v1p08_125c_ccs.lib',
+            '../foundry/smic55/lib/scc55nll_hd_rvt_ss_v1p08_125c_ccs.lib'
         ),
         'std,HD,MIN': (
-            '/home/zcn/iFlow/foundry/smic55/lib/scc55nll_hd_hvt_ff_v1p32_-40c_ccs.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/scc55nll_hd_lvt_ff_v1p32_-40c_ccs.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/scc55nll_hd_rvt_ff_v1p32_-40c_ccs.lib'
+            '../foundry/smic55/lib/scc55nll_hd_hvt_ff_v1p32_-40c_ccs.lib',
+            '../foundry/smic55/lib/scc55nll_hd_lvt_ff_v1p32_-40c_ccs.lib',
+            '../foundry/smic55/lib/scc55nll_hd_rvt_ff_v1p32_-40c_ccs.lib'
         ),
         'dontuse'   : '*HVT* *DEL* *V0* *V24* *V20* *222* *33* *32* *F_DIO* *PULL* *TBUF* SED* SND* SD* *DCAP* VDD* P1* P2* PV* PB* *CLK* PX* PI* PA* PD* *POR*',
         'macro,MAX' : (
-            '/home/zcn/iFlow/foundry/smic55/lib/S55NLL_CP_V0p2_ss_v1p08_125C.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/S55NLLGSPH_X512Y16D32_BW_ss_1.08_125.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/S55NLLGVMH_X128Y8D32_ss_1.08_125.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/S55NLLPLLGS_ZP1500A_V1.2.8_max.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/SP55NLLD2RP_POR12C_OV3_V0p1_ss_v1p08_125C.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/SPT55NLLD2RP_OV3_ANALOG_V0p3_ss_V1p08_125C.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/SPT55NLLD2RP_OV3_V0p3_ss_V1p08_125C.lib'
+            '../foundry/smic55/lib/S55NLL_CP_V0p2_ss_v1p08_125C.lib',
+            '../foundry/smic55/lib/S55NLLGSPH_X512Y16D32_BW_ss_1.08_125.lib',
+            '../foundry/smic55/lib/S55NLLGVMH_X128Y8D32_ss_1.08_125.lib',
+            '../foundry/smic55/lib/S55NLLPLLGS_ZP1500A_V1.2.8_max.lib',
+            '../foundry/smic55/lib/SP55NLLD2RP_POR12C_OV3_V0p1_ss_v1p08_125C.lib',
+            '../foundry/smic55/lib/SPT55NLLD2RP_OV3_ANALOG_V0p3_ss_V1p08_125C.lib',
+            '../foundry/smic55/lib/SPT55NLLD2RP_OV3_V0p3_ss_V1p08_125C.lib'
         ),
         'macro,MIN' : (
-            '/home/zcn/iFlow/foundry/smic55/lib/S55NLL_CP_V0p2_ff_v1p32_-40C.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/S55NLLGSPH_X512Y16D32_BW_ff_1.32_-40.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/S55NLLGVMH_X128Y8D32_ff_1.32_-40.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/S55NLLPLLGS_ZP1500A_V1.2.8_min.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/SP55NLLD2RP_POR12C_OV3_V0p1_ff_v1p32_-40C.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/SPT55NLLD2RP_OV3_ANALOG_V0p3_ff_V1p32_-40C.lib',
-            '/home/zcn/iFlow/foundry/smic55/lib/SPT55NLLD2RP_OV3_V0p3_ff_V1p32_-40C.lib'
+            '../foundry/smic55/lib/S55NLL_CP_V0p2_ff_v1p32_-40C.lib',
+            '../foundry/smic55/lib/S55NLLGSPH_X512Y16D32_BW_ff_1.32_-40.lib',
+            '../foundry/smic55/lib/S55NLLGVMH_X128Y8D32_ff_1.32_-40.lib',
+            '../foundry/smic55/lib/S55NLLPLLGS_ZP1500A_V1.2.8_min.lib',
+            '../foundry/smic55/lib/SP55NLLD2RP_POR12C_OV3_V0p1_ff_v1p32_-40C.lib',
+            '../foundry/smic55/lib/SPT55NLLD2RP_OV3_ANALOG_V0p3_ff_V1p32_-40C.lib',
+            '../foundry/smic55/lib/SPT55NLLD2RP_OV3_V0p3_ff_V1p32_-40C.lib'
         ),
     },
     lef = {
         'tech'      : (
-            '/home/zcn/iFlow/foundry/smic55/lef/scc55nll_hd_9lm_2tm.lef',
+            '../foundry/smic55/lef/scc55nll_hd_9lm_2tm.lef',
         ),
         'std,HD'    : (
-            '/home/zcn/iFlow/foundry/smic55/lef/SCC55NLL_HD_LVT_V2p0.lef',
-            '/home/zcn/iFlow/foundry/smic55/lef/SCC55NLL_HD_RVT_V2p0.lef',
-            '/home/zcn/iFlow/foundry/smic55/lef/SCC55NLL_HD_HVT_V2p0.lef'
+            '../foundry/smic55/lef/SCC55NLL_HD_LVT_V2p0.lef',
+            '../foundry/smic55/lef/SCC55NLL_HD_RVT_V2p0.lef',
+            '../foundry/smic55/lef/SCC55NLL_HD_HVT_V2p0.lef'
         ),
         'macro'     : (
-            '/home/zcn/iFlow/foundry/smic55/lef/S55NLLGSPH_X512Y16D32_BW.lef',
-            '/home/zcn/iFlow/foundry/smic55/lef/S55NLLGVMH_X128Y8D32.lef',
-            '/home/zcn/iFlow/foundry/smic55/lef/S55NLLPLLGS_ZP1500A_9m2tm_V1.2.3.lef',
-            '/home/zcn/iFlow/foundry/smic55/lef/SP55NLLD2RP_POR12C_OV3_V0p2_9MT_2TM.lef',
-            '/home/zcn/iFlow/foundry/smic55/lef/SPT55NLLD2RP_OV3_ANALOG_V0p3_9MT_2TM.lef',
-            '/home/zcn/iFlow/foundry/smic55/lef/SPT55NLLD2RP_OV3_V0p3_9MT_2TM.lef'
+            '../foundry/smic55/lef/S55NLLGSPH_X512Y16D32_BW.lef',
+            '../foundry/smic55/lef/S55NLLGVMH_X128Y8D32.lef',
+            '../foundry/smic55/lef/S55NLLPLLGS_ZP1500A_9m2tm_V1.2.3.lef',
+            '../foundry/smic55/lef/SP55NLLD2RP_POR12C_OV3_V0p2_9MT_2TM.lef',
+            '../foundry/smic55/lef/SPT55NLLD2RP_OV3_ANALOG_V0p3_9MT_2TM.lef',
+            '../foundry/smic55/lef/SPT55NLLD2RP_OV3_V0p3_9MT_2TM.lef'
         )
     },
     gds = {
         'std,HD'    : (
-            '/home/zcn/iFlow/foundry/smic55/gds/SCC55NLL_HD_LVT_V2p0.gds',
-            '/home/zcn/iFlow/foundry/smic55/gds/SCC55NLL_HD_RVT_V2p0.gds',
-            '/home/zcn/iFlow/foundry/smic55/gds/SCC55NLL_HD_HVT_V2p0.gds'
+            '../foundry/smic55/gds/SCC55NLL_HD_LVT_V2p0.gds',
+            '../foundry/smic55/gds/SCC55NLL_HD_RVT_V2p0.gds',
+            '../foundry/smic55/gds/SCC55NLL_HD_HVT_V2p0.gds'
         ),
         'macro'     : (
-            '/home/zcn/iFlow/foundry/smic55/gds/S011HD1P1024X64M4B0.gds',
+            '../foundry/smic55/gds/S011HD1P1024X64M4B0.gds',
         )
     }
 )
@@ -163,17 +163,17 @@ sky130 = Foundry(
     name='sky130',
     lib = {
         'std,HS,TYP': (
-            '/home/zcn/iFlow/foundry/sky130/lib/sky130_fd_sc_hs__tt_025C_1v80.lib',
+            '../foundry/sky130/lib/sky130_fd_sc_hs__tt_025C_1v80.lib',
         ),
         'std,HD,TYP': (
-            '/home/zcn/iFlow/foundry/sky130/lib/sky130_fd_sc_hd__tt_025C_1v80.lib',
+            '../foundry/sky130/lib/sky130_fd_sc_hd__tt_025C_1v80.lib',
         ),
         'dontuse'   : 'sky130_fd_sc_hs__xor3_1 *2111* *221* *311* *32* *41* *clk* *dly* *nand4* *or4*',
         'macro,TYP' : (
-            '/home/zcn/iFlow/foundry/sky130/lib/sky130_dummy_io.lib',
-            '/home/zcn/iFlow/foundry/sky130/lib/sky130_sram_1rw1r_128x256_8_TT_1p8V_25C.lib',
-            '/home/zcn/iFlow/foundry/sky130/lib/sky130_sram_1rw1r_44x64_8_TT_1p8V_25C.lib',
-            '/home/zcn/iFlow/foundry/sky130/lib/sky130_sram_1rw1r_64x256_8_TT_1p8V_25C.lib',
+            '../foundry/sky130/lib/sky130_dummy_io.lib',
+            '../foundry/sky130/lib/sky130_sram_1rw1r_128x256_8_TT_1p8V_25C.lib',
+            '../foundry/sky130/lib/sky130_sram_1rw1r_44x64_8_TT_1p8V_25C.lib',
+            '../foundry/sky130/lib/sky130_sram_1rw1r_64x256_8_TT_1p8V_25C.lib',
             '../iFlow/foundry/sky130/lib/sky130_sram_1rw1r_80x64_8_TT_1p8V_25C.lib'
         ),
     },
