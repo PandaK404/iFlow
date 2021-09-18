@@ -10,14 +10,14 @@
 # env
 IFLOW_BUILD_THREAD_NUM=$(cat /proc/cpuinfo | grep "processor" | wc -l)
 IFLOW_ROOT_DIR=$(cd "$(dirname "$0")" && pwd)
+IFLOW_SHELL_DIR=$(cd "$(dirname "$0")" && pwd)/scripts/shell
 IFLOW_TOOLS_DIR=$(cd "$(dirname "$0")" && pwd)/tools
 
 export IFLOW_BUILD_THREAD_NUM
 export IFLOW_ROOT_DIR
 export IFLOW_TOOLS_DIR
 
-source $IFLOW_ROOT_DIR/shell/common.sh
-
+source $IFLOW_SHELL_DIR/common.sh
 
 echo "  _ _____ _               "
 echo " (_)  ___| | _____      __"
@@ -32,4 +32,4 @@ RUN cd $IFLOW_ROOT_DIR
 RUN git pull origin master
 
 # install tools
-RUN $IFLOW_ROOT_DIR/shell/install_tools.sh
+RUN $IFLOW_SHELL_DIR/install_tools.sh

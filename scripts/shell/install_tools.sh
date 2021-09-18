@@ -8,7 +8,7 @@
  # @FilePath: /iFlow/scripts/shell/install_tools.sh
 ### 
 
-source $IFLOW_ROOT_DIR/shell/common.sh
+source $IFLOW_SHELL_DIR/common.sh
 
 # essential package
 RUN sudo apt install build-essential clang libreadline6-dev bison flex libffi-dev cmake libboost-all-dev swig klayout libeigen3-dev libspdlog-dev -y
