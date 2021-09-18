@@ -23,7 +23,6 @@ Library
   * lemon 1.3.1
 
 ## 一、Build iFlow
-首先进入到要存放iFlow的目录下，输入命令：
 ```
 git clone https://github.com/PCNL-EDA/iFlow.git    //构建iFlow目录结构
 cd iFlow
