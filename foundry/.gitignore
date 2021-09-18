@@ -1,3 +1,4 @@
 *
 !.gitignore
 !sky130
+!sky130/*
