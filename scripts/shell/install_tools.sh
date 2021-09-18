@@ -18,29 +18,6 @@ echo "/_/   /_/       /_____/\____/  ____/|__/   "
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 sleep 1
 
-# essential package
-RUN sudo apt install build-essential clang libreadline6-dev bison flex libffi-dev cmake libboost-all-dev swig klayout libeigen3-dev libspdlog-dev -y
-
-# tcl
-RUN sudo apt install tcl-dev -y
-RUN sudo cp -f /usr/include/tcl8.6/*.h /usr/include/
-RUN sudo ln -s -f /usr/lib/x86_64-linux-gnu/libtcl8.6.so /usr/lib/x86_64-linux-gnu/libtcl8.5.so
-
-# lemon
-CHECK_DIR /usr/local/include/lemon ||\
-{
-    RUN wget http://lemon.cs.elte.hu/pub/sources/lemon-1.3.1.tar.gz
-    RUN tar zxvf lemon-1.3.1.tar.gz
-    RUN cd lemon-1.3.1
-    RUN mkdir build 
-    RUN cd build 
-    RUN cmake .. 
-    RUN make -j$IFLOW_BUILD_THREAD_NUM 
-    RUN sudo make install
-    RUN cd ../../
-    RUN rm -rf lemon-1.3.1 lemon-1.3.1.tar.gz
-}
-
 # yosys4be891e8
 CHECK_DIR $IFLOW_TOOLS_DIR/yosys4be891e8 || RUN git clone https://github.com/The-OpenROAD-Project/yosys.git tools/yosys4be891e8
 RUN cd $IFLOW_TOOLS_DIR/yosys4be891e8
