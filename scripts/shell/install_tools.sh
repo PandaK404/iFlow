@@ -4,11 +4,19 @@
  # @Date: 2021-09-18 15:41:41
  # @Description: 
  # @LastEditors: Zhisheng Zeng
- # @LastEditTime: 2021-09-18 16:14:18
+ # @LastEditTime: 2021-09-18 17:54:13
  # @FilePath: /iFlow/scripts/shell/install_tools.sh
 ### 
 
 source $IFLOW_SHELL_DIR/common.sh
+
+echo "_____ ________________ _______ ___       __"
+echo "___(_)___  ____/___  / __  __ \__ |     / /"
+echo "__  / __  /_    __  /  _  / / /__ | /| / / "
+echo "_  /  _  __/    _  /___/ /_/ / __ |/ |/ /  "
+echo "/_/   /_/       /_____/\____/  ____/|__/   "
+echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+sleep 1
 
 # essential package
 RUN sudo apt install build-essential clang libreadline6-dev bison flex libffi-dev cmake libboost-all-dev swig klayout libeigen3-dev libspdlog-dev -y
