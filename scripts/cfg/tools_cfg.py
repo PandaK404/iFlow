@@ -42,4 +42,4 @@ tool6  = Tools(
 tool7  = Tools(
         ('floorplan','tapcell','pdn','gplace','resize','dplace','cts','filler','groute'),   
         'openroad_0.9.0',
-        '../../../iFlow/tools/OpenROAD9295a533/build/src/openroad')
+        '../../../iFlow/tools/OpenROAD_fixcts/openroad')

@@ -6,9 +6,13 @@ source ../../scripts/common/set_env.tcl
 #===========================================================
 #   set tool related parameter
 #===========================================================
-set ROOT_BUF        "sky130_fd_sc_hs__buf_1"
-set BUF_LIST        "sky130_fd_sc_hs__buf_1"
-
+if { [string equal $TRACK "HS"] == 1 } {
+    set ROOT_BUF        "sky130_fd_sc_hs__buf_1"
+    set BUF_LIST        "sky130_fd_sc_hs__buf_1"
+} elseif { [string equal $TRACK "HD"] == 1 } {
+    set ROOT_BUF        "sky130_fd_sc_hd__buf_1"
+    set BUF_LIST        "sky130_fd_sc_hd__buf_1"
+}
 #===========================================================
 #   main running
 #===========================================================

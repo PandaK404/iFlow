@@ -7,7 +7,7 @@ source ../../scripts/common/set_env.tcl
 #   set tool related parameter
 #===========================================================
 set WIRE_RC_LAYER   "met3"
-set PLACE_DENSITY   "0.3"
+set PLACE_DENSITY   "0.4"
 
 #===========================================================
 #   main running
@@ -29,9 +29,9 @@ read_sdc $SDC_FILE
 
 set_wire_rc -layer $WIRE_RC_LAYER
 
-global_placement -density $PLACE_DENSITY
+# global_placement -density $PLACE_DENSITY
 
-#global_placement -incremental -overflow 0.05 -density $PLACE_DENSITY
+global_placement -incremental -overflow 0.1 -density $PLACE_DENSITY
 
 # write output
 write_def       $RESULT_PATH/$DESIGN.def

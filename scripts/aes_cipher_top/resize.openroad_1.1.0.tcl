@@ -8,9 +8,18 @@ source ../../scripts/common/set_env.tcl
 #===========================================================
 set WIRE_RC_LAYER       "met3"
 set MAX_FANOUT          "30" 
-set TIEHI_CELL_AND_PORT "sky130_fd_sc_hs__conb_1 HI" 
-set TIELO_CELL_AND_PORT "sky130_fd_sc_hs__conb_1 LO" 
-set FIX_DRC_BUF         "sky130_fd_sc_hs__buf_8"
+
+if { [string equal $TRACK "HS"] == 1 } {
+    puts $TRACK
+    set TIEHI_CELL_AND_PORT     "sky130_fd_sc_hs__conb_1 HI"
+    set TIELO_CELL_AND_PORT     "sky130_fd_sc_hs__conb_1 LO"
+    set FIX_DRC_BUF             "sky130_fd_sc_hs__buf_8"
+} elseif { [string equal $TRACK "HD"] == 1 } {
+    puts $TRACK
+    set TIEHI_CELL_AND_PORT     "sky130_fd_sc_hd__conb_1 HI"
+    set TIELO_CELL_AND_PORT     "sky130_fd_sc_hd__conb_1 LO"
+    set FIX_DRC_BUF             "sky130_fd_sc_hd__buf_8"
+}
 
 #===========================================================
 #   main running
