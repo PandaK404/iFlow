@@ -1,2 +1,4 @@
 *
 !.gitignore
+!OpenROAD_fixcts
+!OpenROAD_fixcts/*
