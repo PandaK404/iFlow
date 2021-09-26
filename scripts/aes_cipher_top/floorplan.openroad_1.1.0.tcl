@@ -6,8 +6,8 @@ source ../../scripts/common/set_env.tcl
 #===========================================================
 #   set tool related parameter
 #===========================================================
-set DIE_AREA            "0 0 685 477" 
-set CORE_AREA           "20 20 645 437" 
+set DIE_AREA            "0 0 1120 1020.8" 
+set CORE_AREA           "10 12 1110 1011.2" 
 set TRACKS_INFO_FILE    "$PROJ_PATH/foundry/$FOUNDRY/tracks.info" 
 set PLACE_SITE          "unit" 
 #set IP_GLOBAL_CFG       "$PROJ_PATH/scripts/$DESIGN/IP_global.cfg"
