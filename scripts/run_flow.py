@@ -113,13 +113,13 @@ for astep in args.step.split(',') :
     os.environ['IFLOW_PRE_RESULT_PATH'] = proj_path+'/result/'+pre_expaned_name
     os.environ['IFLOW_RTL_PATH']        = proj_path+'/rtl/'+args.design
     os.environ['IFLOW_SDC_FILE']        = proj_path+'/rtl/'+args.design+'/'+args.design+'.sdc'
-    os.environ['IFLOW_LIB_FILES']       = ' '.join(Foundry.get_libs(foundry_sel)['std,'+track_sel+','+corner_sel]+
-                                                   Foundry.get_libs(foundry_sel)['macro,'+corner_sel])
-    os.environ['IFLOW_LEF_FILES']       = ' '.join(Foundry.get_lefs(foundry_sel)['tech']+
-                                                   Foundry.get_lefs(foundry_sel)['std,'+track_sel]+
-                                                   Foundry.get_lefs(foundry_sel)['macro'])
-    os.environ['IFLOW_GDS_FILES']       = ' '.join(Foundry.get_gds(foundry_sel)['std,'+track_sel]+
-                                                   Foundry.get_gds(foundry_sel)['macro'])
+    os.environ['IFLOW_LIB_FILES']       = proj_path+'/'+(' '+proj_path+'/').join(Foundry.get_libs(foundry_sel)['std,'+track_sel+','+corner_sel]+
+                                                                                 Foundry.get_libs(foundry_sel)['macro,'+corner_sel])
+    os.environ['IFLOW_LEF_FILES']       = proj_path+'/'+(' '+proj_path+'/').join(Foundry.get_lefs(foundry_sel)['tech']+
+                                                                                 Foundry.get_lefs(foundry_sel)['std,'+track_sel]+
+                                                                                 Foundry.get_lefs(foundry_sel)['macro'])
+    os.environ['IFLOW_GDS_FILES']       = proj_path+'/'+(' '+proj_path+'/').join(Foundry.get_gds(foundry_sel)['std,'+track_sel]+
+                                                                                 Foundry.get_gds(foundry_sel)['macro'])
 
     os.system('mkdir -p '+os.environ['IFLOW_WORK_PATH'])
     os.system('mkdir -p '+os.environ['IFLOW_RPT_PATH'])
