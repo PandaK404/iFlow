@@ -13,10 +13,23 @@ IFLOW_ROOT_DIR=$(cd "$(dirname "$0")" && pwd)
 IFLOW_SHELL_DIR=$(cd "$(dirname "$0")" && pwd)/scripts/shell
 IFLOW_TOOLS_DIR=$(cd "$(dirname "$0")" && pwd)/tools
 
+IFLOW_CLONE_URL="github.com"
+
+if(($#==2));then
+    if [ $1 == "-mirror" ];then
+        # IFLOW_CLONE_URL="github.com.cnpmjs.org"
+        IFLOW_CLONE_URL="hub.fastgit.org"
+    elif
+        echo "please use './build_flow.sh -mirror' !"
+        exit
+    fi
+fi
+
 export IFLOW_BUILD_THREAD_NUM
 export IFLOW_ROOT_DIR
 export IFLOW_SHELL_DIR
 export IFLOW_TOOLS_DIR
+export IFLOW_CLONE_URL
 
 source $IFLOW_SHELL_DIR/common.sh
 
