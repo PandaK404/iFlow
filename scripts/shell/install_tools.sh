@@ -19,7 +19,7 @@ echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 sleep 1
 
 # yosys4be891e8
-CHECK_DIR $IFLOW_TOOLS_DIR/yosys4be891e8 || RUN git clone https://github.com/The-OpenROAD-Project/yosys.git tools/yosys4be891e8
+CHECK_DIR $IFLOW_TOOLS_DIR/yosys4be891e8 || RUN git clone https://${IFLOW_CLONE_URL}/The-OpenROAD-Project/yosys.git tools/yosys4be891e8
 RUN cd $IFLOW_TOOLS_DIR/yosys4be891e8
 RUN git checkout 4be891e8
 CHECK_DIR $IFLOW_TOOLS_DIR/yosys4be891e8/build || RUN mkdir build
@@ -28,7 +28,7 @@ RUN make -f ../Makefile -j$IFLOW_BUILD_THREAD_NUM
 RUN cd $IFLOW_ROOT_DIR
 
 # TritonRoute758cdac
-CHECK_DIR $IFLOW_TOOLS_DIR/TritonRoute758cdac || RUN git clone https://github.com/The-OpenROAD-Project/TritonRoute.git tools/TritonRoute758cdac
+CHECK_DIR $IFLOW_TOOLS_DIR/TritonRoute758cdac || RUN git clone https://${IFLOW_CLONE_URL}/The-OpenROAD-Project/TritonRoute.git tools/TritonRoute758cdac
 RUN cd $IFLOW_TOOLS_DIR/TritonRoute758cdac
 RUN git checkout 758cdac
 CHECK_DIR $IFLOW_TOOLS_DIR/TritonRoute758cdac/build || RUN mkdir build
@@ -38,12 +38,12 @@ RUN make -j$IFLOW_BUILD_THREAD_NUM
 RUN cd $IFLOW_ROOT_DIR
     
 # OpenROAD9295a533
-CHECK_DIR $IFLOW_TOOLS_DIR/OpenROAD9295a533 || RUN git clone https://github.com/The-OpenROAD-Project/OpenROAD.git tools/OpenROAD9295a533
+CHECK_DIR $IFLOW_TOOLS_DIR/OpenROAD9295a533 || RUN git clone https://${IFLOW_CLONE_URL}/The-OpenROAD-Project/OpenROAD.git tools/OpenROAD9295a533
 RUN cd $IFLOW_TOOLS_DIR/OpenROAD9295a533 
 RUN git checkout 9295a533 
 RUN cd $IFLOW_TOOLS_DIR/OpenROAD9295a533/src
 RUN git submodule update --init --recursive OpenSTA OpenDB flute3 replace ioPlacer FastRoute eigen TritonMacroPlace OpenRCX
-CHECK_DIR $IFLOW_TOOLS_DIR/OpenROAD9295a533/src/PDNSim || RUN git clone https://github.com/ZhishengZeng/PDNSim.git PDNSim
+CHECK_DIR $IFLOW_TOOLS_DIR/OpenROAD9295a533/src/PDNSim || RUN git clone https://${IFLOW_CLONE_URL}/ZhishengZeng/PDNSim.git PDNSim
 RUN cd $IFLOW_TOOLS_DIR/OpenROAD9295a533
 CHECK_DIR $IFLOW_TOOLS_DIR/OpenROAD9295a533/build || RUN mkdir build
 RUN cd build 
@@ -52,7 +52,7 @@ RUN make -j$IFLOW_BUILD_THREAD_NUM
 RUN cd $IFLOW_ROOT_DIR
 
 # OpenROADae191807
-CHECK_DIR $IFLOW_TOOLS_DIR/OpenROADae191807 || RUN git clone https://github.com/The-OpenROAD-Project/OpenROAD.git tools/OpenROADae191807
+CHECK_DIR $IFLOW_TOOLS_DIR/OpenROADae191807 || RUN git clone https://${IFLOW_CLONE_URL}/The-OpenROAD-Project/OpenROAD.git tools/OpenROADae191807
 RUN cd $IFLOW_TOOLS_DIR/OpenROADae191807 
 RUN git checkout ae191807  
 RUN git submodule update --init --recursive
