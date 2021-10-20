@@ -19,7 +19,7 @@ if [ $# == "2" ];then
     if [ $1 == "-mirror" ];then
         # IFLOW_CLONE_URL="github.com.cnpmjs.org"
         IFLOW_CLONE_URL="hub.fastgit.org"
-    elif
+    else
         echo "please use './build_flow.sh -mirror' !"
         exit
     fi
