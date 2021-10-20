@@ -15,7 +15,7 @@ IFLOW_TOOLS_DIR=$(cd "$(dirname "$0")" && pwd)/tools
 
 IFLOW_CLONE_URL="github.com"
 
-if[ $# == 2 ]
+if[ $# == "2" ]
     if [ $1 == "-mirror" ];then
         # IFLOW_CLONE_URL="github.com.cnpmjs.org"
         IFLOW_CLONE_URL="hub.fastgit.org"
