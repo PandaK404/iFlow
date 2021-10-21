@@ -24,10 +24,20 @@ Library
 
 ## 一、Build iFlow
 ```
-git clone https://github.com/PCNL-EDA/iFlow.git    //构建iFlow目录结构
+git clone https://github.com/PCNL-EDA/iFlow.git   //构建iFlow目录结构
 cd iFlow
-./build_iflow.sh                                   //运行脚本下载EDA工具
 ```
+
+不使用代理下载
+```
+./build_iflow.sh                                  //运行脚本下载EDA工具
+```
+
+使用代理下载，代理可自定义。下例代理为hub.fastgit.org
+```
+./build_iflow.sh -mirror hub.fastgit.org          //运行脚本下载EDA工具
+```
+
 完成后即可使用iFlow。
 
 ## 二、iFlow目录结构
