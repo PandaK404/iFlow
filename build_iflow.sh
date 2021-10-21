@@ -13,9 +13,9 @@ IFLOW_ROOT_DIR=$(cd "$(dirname "$0")" && pwd)
 IFLOW_SHELL_DIR=$(cd "$(dirname "$0")" && pwd)/scripts/shell
 IFLOW_TOOLS_DIR=$(cd "$(dirname "$0")" && pwd)/tools
 
-if [ $# == "1" ];then
+if [ $# == "0" ];then
     IFLOW_MIRROR_URL="github.com"
-elif [ $# == "3" && $1 == "-mirror" ];then
+elif [ $# == "2" ] && [ $1 == "-mirror" ];then
     IFLOW_MIRROR_URL=$2
 else
     echo "please use './build_flow.sh -mirror <mirror url>' !"
