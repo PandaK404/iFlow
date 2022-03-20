@@ -43,3 +43,11 @@ tool7  = Tools(
         ('floorplan','tapcell','pdn','gplace','resize','dplace','cts','filler','groute'),   
         'openroad_0.9.0',
         '../../../iFlow/tools/OpenROAD_fixcts/openroad')
+tool8  = Tools(
+        ('groute',),   
+        'iGR',
+        '../../../iFlow/tools/iGR/run_gr')
+tool9  = Tools(
+        ('droute',),   
+        'iDR',
+        '../../../iFlow/tools/iDR/run_dr')

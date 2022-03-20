@@ -1,0 +1,39 @@
+{
+    "INPUT": {
+        "tech_lef_path": "/home/benchmark/lef/scc011u_8lm_1tm_thin_ALPA.lef",
+        "lef_paths": [
+            "/home/benchmark/lef/scc011ums_hd_lvt.lef",
+            "/home/benchmark/lef/scc011ums_hd_rvt.lef",
+            "/home/benchmark/lef/scc011ums_hd_hvt.lef",
+            "/home/benchmark/lef/S013PLLFN_8m_V1_2_1.lef",
+            "/home/benchmark/lef/SP013D3WP_V1p7_8MT.lef",
+            "/home/benchmark/lef/S011HD1P256X32M2B0.lef",
+            "/home/benchmark/lef/S011HD1P512X58M2B0.lef",
+            "/home/benchmark/lef/S011HD1P1024X64M4B0.lef",
+            "/home/benchmark/lef/S011HD1P256X8M4B0.lef",
+            "/home/benchmark/lef/S011HD1P512X73M2B0.lef",
+            "/home/benchmark/lef/S011HD1P128X21M2B0.lef",
+            "/home/benchmark/lef/S011HD1P512X19M4B0.lef",
+            "/home/benchmark/lef/S011HDSP4096X64M8B0.lef"
+        ],
+        "def_path": "/home/benchmark/def/iEDA_TO_io_0215.def",
+        "guide_path": "/home/benchmark/def/iEDA_TO_io_0215_s8_ap.guide"
+    },
+    "OUTPUT": {
+        "output_dir_path": "/home/mokai/def2gds/source"
+    },
+    "DR": {
+        "routing_size": 1,
+        "gcell_size": 6560,
+        "TrackAssigner": {
+            "adjacent_segment_ratio": 0.1,
+            "connect_pin_ratio": 0.1,
+            "overlap_ratio": 100,
+            "pin_obs_ratio": 0.5,
+            "drc_ratio": 1000,
+            "block_ratio": 1000000
+        }
+    }
+}
+   // "guide_path": "/home/benchmark/def/iEDA_TO_io_0215_s8_ap.guide"
+   //"/home/zengzhisheng/ysyx3case/gr_result/iEDA_TO_io_0215.guide"

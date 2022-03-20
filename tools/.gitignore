@@ -1,5 +1,9 @@
 *
 !.gitignore
+!iDR
+!iDR/**
+!iGR
+!iGR/**
 !OpenROAD_fixcts
 !OpenROAD_fixcts/**
 !yosys4be891e8
