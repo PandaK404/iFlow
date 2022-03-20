@@ -35,7 +35,7 @@ RUN git checkout 758cdac
 # RUN cd build 
 # RUN cmake .. 
 # RUN make -j$IFLOW_BUILD_THREAD_NUM
-# RUN cd $IFLOW_ROOT_DIR
+RUN cd $IFLOW_ROOT_DIR
     
 # OpenROAD9295a533
 CHECK_DIR $IFLOW_TOOLS_DIR/OpenROAD9295a533 || RUN git clone https://${IFLOW_MIRROR_URL}/The-OpenROAD-Project/OpenROAD.git tools/OpenROAD9295a533
@@ -49,7 +49,7 @@ CHECK_DIR $IFLOW_TOOLS_DIR/OpenROAD9295a533/src/PDNSim || RUN git clone https://
 # RUN cd build 
 # RUN cmake .. 
 # RUN make -j$IFLOW_BUILD_THREAD_NUM
-# RUN cd $IFLOW_ROOT_DIR
+RUN cd $IFLOW_ROOT_DIR
 
 # OpenROADae191807
 CHECK_DIR $IFLOW_TOOLS_DIR/OpenROADae191807 || RUN git clone https://${IFLOW_MIRROR_URL}/The-OpenROAD-Project/OpenROAD.git tools/OpenROADae191807
@@ -60,7 +60,7 @@ RUN git submodule update --init --recursive
 # RUN cd build 
 # RUN cmake .. 
 # RUN make -j$IFLOW_BUILD_THREAD_NUM
-# RUN cd $IFLOW_ROOT_DIR
+RUN cd $IFLOW_ROOT_DIR
 
 echo ""
 echo "************************************"
