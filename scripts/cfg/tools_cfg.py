@@ -18,7 +18,7 @@ from   data_def import *
 tool1  = Tools(
         ('synth',),
         'yosys_0.9',
-        '../../../iFlow/tools/yosys4be891e8/build/yosys')
+        '../../../iFlow/tools/yosys4be891e8/bin/yosys')
 tool2  = Tools(
         ('floorplan','tapcell','pdn','gplace','resize','dplace','cts','filler','groute'),   
         'openroad_1.1.0',

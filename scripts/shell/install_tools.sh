@@ -19,13 +19,13 @@ echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 sleep 1
 
 # yosys4be891e8
-CHECK_DIR $IFLOW_TOOLS_DIR/yosys4be891e8 || RUN git clone https://${IFLOW_MIRROR_URL}/The-OpenROAD-Project/yosys.git tools/yosys4be891e8
-RUN cd $IFLOW_TOOLS_DIR/yosys4be891e8
-RUN git checkout 4be891e8
-CHECK_DIR $IFLOW_TOOLS_DIR/yosys4be891e8/build || RUN mkdir build
-RUN cd build 
-RUN make -f ../Makefile -j$IFLOW_BUILD_THREAD_NUM
-RUN cd $IFLOW_ROOT_DIR
+# CHECK_DIR $IFLOW_TOOLS_DIR/yosys4be891e8 || RUN git clone https://${IFLOW_MIRROR_URL}/The-OpenROAD-Project/yosys.git tools/yosys4be891e8
+# RUN cd $IFLOW_TOOLS_DIR/yosys4be891e8
+# RUN git checkout 4be891e8
+# CHECK_DIR $IFLOW_TOOLS_DIR/yosys4be891e8/build || RUN mkdir build
+# RUN cd build 
+# RUN make -f ../Makefile -j$IFLOW_BUILD_THREAD_NUM
+# RUN cd $IFLOW_ROOT_DIR
 
 # TritonRoute758cdac
 CHECK_DIR $IFLOW_TOOLS_DIR/TritonRoute758cdac || RUN git clone https://${IFLOW_MIRROR_URL}/The-OpenROAD-Project/TritonRoute.git tools/TritonRoute758cdac
