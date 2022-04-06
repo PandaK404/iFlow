@@ -4,3 +4,7 @@
 !aes_cipher_top/*
 !coyote_tc
 !coyote_tc/*
+!gcd
+!gcd/*
+!uart
+!uart/*
