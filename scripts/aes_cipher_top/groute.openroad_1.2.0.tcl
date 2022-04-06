@@ -7,9 +7,45 @@ source ../../scripts/common/set_env.tcl
 #===========================================================
 #   set tool related parameter
 #===========================================================
-set MAX_ROUTING_LAYER   "6" 
-set WIRE_RC_LAYER       "met3" 
-
+if { $FOUNDRY == "sky130" } {
+#    set MAX_ROUTING_LAYER   "6" 
+    set WIRE_RC_LAYER       "met3" 
+    set LAYER_M2            met2
+    set LAYER_M3            met3
+    set LAYER_M4            met4
+    set LAYER_M5            met5
+    set LAYER_M6            met6
+    set LAYER_M7            met7
+    set SIGNAL_LAYER        "met2-met4"
+    set CLOCK_LAYER         "met2-met3"
+} elseif { $FOUNDRY == "nangate45" } {
+#    set MAX_ROUTING_LAYER   "6" 
+    set WIRE_RC_LAYER       "metal3" 
+    set LAYER_M2            metal2
+    set LAYER_M3            metal3
+    set LAYER_M4            metal4
+    set LAYER_M5            metal5
+    set LAYER_M6            metal6
+    set LAYER_M7            metal7
+    set LAYER_M8            metal8
+    set LAYER_M9            metal9
+    set LAYER_M10           metal10
+    set SIGNAL_LAYER        "metal2-metal6"
+    set CLOCK_LAYER         "metal2-metal5"
+} elseif { $FOUNDRY == "asap7" } {
+    set MAX_ROUTING_LAYER   "6" 
+    set WIRE_RC_LAYER       "M3" 
+    set LAYER_M2            M2
+    set LAYER_M3            M3
+    set LAYER_M4            M4
+    set LAYER_M5            M5
+    set LAYER_M6            M6
+    set LAYER_M7            M7
+    set LAYER_M8            M8
+    set LAYER_M9            M9
+    set SIGNAL_LAYER        "M2-M7"
+    set CLOCK_LAYER         "M2-M8"
+}
 #===========================================================
 #   main running
 #===========================================================
@@ -32,12 +68,21 @@ set db      [::ord::get_db]
 set block   [[$db getChip] getBlock]
 set tech    [$db getTech]
 
-set layer_M2 [$tech findLayer met2]
-set layer_M3 [$tech findLayer met3]
-set layer_M4 [$tech findLayer met4]
-set layer_M5 [$tech findLayer met5]
-set layer_M6 [$tech findLayer met6]
-set layer_M7 [$tech findLayer met7]
+set layer_M2 [$tech findLayer $LAYER_M2]
+set layer_M3 [$tech findLayer $LAYER_M3]
+set layer_M4 [$tech findLayer $LAYER_M4]
+set layer_M5 [$tech findLayer $LAYER_M5]
+set layer_M6 [$tech findLayer $LAYER_M6]
+set layer_M7 [$tech findLayer $LAYER_M7]
+
+if { $FOUNDRY == "nangate45" } {
+set layer_M8 [$tech findLayer $LAYER_M8]
+set layer_M9 [$tech findLayer $LAYER_M9]
+set layer_M10 [$tech findLayer $LAYER_M10]
+} elseif { $FOUNDRY == "aspa7" } {
+set layer_M8 [$tech findLayer $LAYER_M8]
+set layer_M9 [$tech findLayer $LAYER_M9]
+}
 
 set distance 500
 
@@ -45,6 +90,7 @@ set allInsts [$block getInsts]
 
 set cnt 0
 
+# MEM
 foreach inst $allInsts {
     set master [$inst getMaster]
     set name [$master getName]
@@ -84,34 +130,11 @@ global_route -guide_file $RESULT_PATH/route.guide \
 	     -overflow_iterations 200 \
 	     -verbose 2 \
 
-set_routing_layers -signal met2-met4 \
-                   -clock met3-met4
+set_routing_layers -signal $SIGNAL_LAYER \
+                   -clock  $CLOCK_LAYER 
 
-set_global_routing_layer_adjustment met4 0.5
-set_global_routing_layer_adjustment met5 0.5
-
-#set_routing_layers -signal 2-6 \
-#                   -clock 3-6
-
-#fastroute -output_file $RESULT_PATH/route.guide \
-#          -max_routing_layer $MAX_ROUTING_LAYER \
-#          -unidirectional_routing true \
-#          -capacity_adjustment 0.15 \
-#          -overflow_iterations 200 \
-#          -layers_adjustments {{5 0.5} {6 0.5}} \
-#          -verbose 2
-          #-layers_adjustments {{4 0.87} {5 0.75} {6 0.75} {7 0.5}} \
-
-#set_global_routing_layer_adjustment 6 0.75
-#set_global_routing_layer_adjustment 7 0.5
-#fastroute -output_file $RESULTS_DIR/route.guide \
-#          -report_congestion $RESULTS_DIR/congestion.rpt \
-#          -max_routing_layer $MAX_ROUTING_LAYER \
-#          -unidirectional_routing true \
-#          -overflow_iterations 200 \
-#          -verbose 2    \
-#          -clock_layers 4-7 \
-#          -allow_overflow
+set_global_routing_layer_adjustment $LAYER_M4 0.5
+set_global_routing_layer_adjustment $LAYER_M5 0.5
 
 # write output
 write_def       $RESULT_PATH/$DESIGN.def

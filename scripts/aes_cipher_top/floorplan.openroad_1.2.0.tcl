@@ -8,8 +8,25 @@ source ../../scripts/common/set_env.tcl
 #===========================================================
 set DIE_AREA            "0 0 1120 1020.8" 
 set CORE_AREA           "10 12 1110 1011.2" 
+#set DIE_AREA            "0 0 220.2 220.2" 
+#set CORE_AREA           "1.08 1.08 219.12 219.12" 
+
 set TRACKS_INFO_FILE    "$PROJ_PATH/foundry/$FOUNDRY/tracks_1.2.0.info" 
-set PLACE_SITE          "unit" 
+
+if { $FOUNDRY == "sky130" } {      
+    set PLACE_SITE   "unit"
+    set IO_H_LAYER   "met3"
+    set IO_V_LAYER   "met2"
+} elseif { $FOUNDRY == "nangate45" } {
+    set PLACE_SITE   "FreePDK45_38x28_10R_NP_162NW_34O"
+    set IO_H_LAYER   "metal3"
+    set IO_V_LAYER   "metal2"
+} elseif { $FOUNDRY == "asap7" } {
+    set PLACE_SITE   "asap7sc7p5t"
+    set IO_H_LAYER   "M4"
+    set IO_V_LAYER   "M5"
+}
+
 #set IP_GLOBAL_CFG       "$PROJ_PATH/scripts/$DESIGN/IP_global.cfg"
 
 #===========================================================
@@ -126,14 +143,9 @@ if {[info exists strategy_file]} {
 
     source $TRACKS_INFO_FILE
 
-#    write_def $RESULT_PATH/1.def
     place_pins -random \
-               -hor_layer met3 \
-               -ver_layer met2 
-
-#    io_placer -hor_layer met5 \
-#              -ver_layer met4 \
-#              -random
+               -hor_layer $IO_H_LAYER \
+               -ver_layer $IO_V_LAYER 
 
     #source $PROJ_PATH/scripts/$DESIGN/place_io_1.tcl
     #source $PROJ_PATH/scripts/$DESIGN/place_block.tcl

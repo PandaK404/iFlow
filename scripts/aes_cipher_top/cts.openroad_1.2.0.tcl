@@ -6,14 +6,24 @@ source ../../scripts/common/set_env.tcl
 #===========================================================
 #   set tool related parameter
 #===========================================================
-if { [string equal $TRACK "HS"] == 1 } {
-    set ROOT_BUF        "sky130_fd_sc_hs__buf_1"
-    set BUF_LIST        "sky130_fd_sc_hs__buf_1"
-} elseif { [string equal $TRACK "HD"] == 1 } {
-    set ROOT_BUF        "sky130_fd_sc_hd__buf_1"
-    set BUF_LIST        "sky130_fd_sc_hd__buf_1"
+if { $FOUNDRY == "sky130" } {
+    if { $TRACK == "HS" } {
+        set ROOT_BUF        "sky130_fd_sc_hs__buf_1"
+        set BUF_LIST        "sky130_fd_sc_hs__buf_1"
+    } elseif { $TRACK == "HD" } {
+        set ROOT_BUF        "sky130_fd_sc_hd__buf_1"
+        set BUF_LIST        "sky130_fd_sc_hd__buf_1"
+    }   
+    set WIRE_RC_LAYER   "met3"
+} elseif { $FOUNDRY == "nangate45" } {
+    set ROOT_BUF        "CLKBUF_X2"
+    set BUF_LIST        "CLKBUF_X2"
+    set WIRE_RC_LAYER   "metal3"
+} elseif { $FOUNDRY == "asap7" } {
+    set ROOT_BUF        "BUFx4_ASAP7_75t_R"
+    set BUF_LIST        "BUFx4_ASAP7_75t_R"
+    set WIRE_RC_LAYER   "M3"
 }
-set WIRE_RC_LAYER   "met3"
 
 #===========================================================
 #   main running
@@ -40,18 +50,6 @@ puts "--------------------------------------------------------------------------
 report_checks
 
 # Run CTS
-#clock_tree_synthesis -lut_file "$RESULT_PATH/lut.txt" \
-#                     -sol_list "$RESULT_PATH/sol_list.txt" \
-#                     -root_buf "$CTS_BUF_CELL" \
-#                     -wire_unit 20
-#configure_cts_characterization     \
-#    -sqr_cap  2.60e-2 \
-#    -sqr_res  0.7 \
-#    -max_cap 5.0e-12 \
-#    -max_slew  5.0e-10 \
-
-    #-cap_inter  1.6e-12 \
-    #-slew_inter 4.0e-10 
 set_wire_rc -layer $WIRE_RC_LAYER
 repair_clock_inverters
 clock_tree_synthesis \

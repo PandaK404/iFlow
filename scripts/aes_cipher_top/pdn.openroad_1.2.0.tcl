@@ -6,7 +6,7 @@ source ../../scripts/common/set_env.tcl
 #===========================================================
 #   set tool related parameter
 #===========================================================
-set PDN_CFG_FILE        "$PROJ_PATH/scripts/$DESIGN/pdn.cfg"
+set PDN_CFG_FILE        "$PROJ_PATH/scripts/$DESIGN/pdn_$FOUNDRY.cfg"
 
 #===========================================================
 #   main running

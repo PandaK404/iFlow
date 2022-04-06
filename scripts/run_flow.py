@@ -90,8 +90,8 @@ for astep in args.step.split(',') :
                 prestep_sel      = args.prestep
                 pre_tool_name    = Flow.get_tool(args.design)[prestep_sel]
 
-    expaned_name        = '.'.join((args.design,astep,cur_tool_name,track_sel,corner_sel,args.version))
-    pre_expaned_name    = '.'.join((args.design,prestep_sel,pre_tool_name,track_sel,corner_sel,args.preversion))
+    expaned_name        = '.'.join((args.design,astep,cur_tool_name,foundry_sel,track_sel,corner_sel,args.version))
+    pre_expaned_name    = '.'.join((args.design,prestep_sel,pre_tool_name,foundry_sel,track_sel,corner_sel,args.preversion))
     print('Current  full name : '+expaned_name)
     print('Previous full name : '+pre_expaned_name+'\n')
     

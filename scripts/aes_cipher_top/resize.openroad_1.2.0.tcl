@@ -6,11 +6,29 @@ source ../../scripts/common/set_env.tcl
 #===========================================================
 #   set tool related parameter
 #===========================================================
-set WIRE_RC_LAYER       "met3"
-set MAX_FANOUT          "30" 
-set TIEHI_CELL_AND_PORT "sky130_fd_sc_hs__conb_1 HI" 
-set TIELO_CELL_AND_PORT "sky130_fd_sc_hs__conb_1 LO" 
-set FIX_DRC_BUF         "sky130_fd_sc_hs__buf_8"
+set MAX_FANOUT      "30" 
+if { $FOUNDRY == "sky130" } {
+    set WIRE_RC_LAYER       "met3"
+    if { $TRACK == "HS" } {
+         set TIEHI_CELL_AND_PORT "sky130_fd_sc_hs__conb_1 HI" 
+         set TIELO_CELL_AND_PORT "sky130_fd_sc_hs__conb_1 LO" 
+         set FIX_DRC_BUF         "sky130_fd_sc_hs__buf_8"
+    } elseif { $TRACK == "HD" } {
+	 set TIEHI_CELL_AND_PORT "sky130_fd_sc_hd__conb_1 HI"
+         set TIELO_CELL_AND_PORT "sky130_fd_sc_hd__conb_1 LO" 
+         set FIX_DRC_BUF         "sky130_fd_sc_hd__buf_8"
+    }
+} elseif { $FOUNDRY == "nangate45" } {
+    set WIRE_RC_LAYER       "metal3"
+    set TIEHI_CELL_AND_PORT "LOGIC1_X1 Z"
+    set TIELO_CELL_AND_PORT "LOGIC0_X1 Z" 
+    set FIX_DRC_BUF         "BUF_X4"
+} elseif { $FOUNDRY == "asap7" } {
+    set WIRE_RC_LAYER       "M3"
+    set TIEHI_CELL_AND_PORT "TIEHIx1_ASAP7_75t_R H"
+    set TIELO_CELL_AND_PORT "TIELOx1_ASAP7_75t_R L" 
+    set FIX_DRC_BUF         "BUFx4_ASAP7_75t_R"
+}
 
 #===========================================================
 #   main running

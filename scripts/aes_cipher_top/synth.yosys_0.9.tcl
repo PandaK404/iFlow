@@ -13,9 +13,27 @@ set CLKGATE_MAP_FILE        "$PROJ_PATH/foundry/$FOUNDRY/verilog/cells_clkgate.v
 set LATCH_MAP_FILE          "$PROJ_PATH/foundry/$FOUNDRY/verilog/cells_latch.v" 
 set BLACKBOX_MAP_TCL        "$PROJ_PATH/foundry/$FOUNDRY/blackbox_map.tcl" 
 set CLOCK_PERIOD            "20.0" 
-set TIEHI_CELL_AND_PORT     "sky130_fd_sc_hs__conb_1 HI" 
-set TIELO_CELL_AND_PORT     "sky130_fd_sc_hs__conb_1 LO" 
-set MIN_BUF_CELL_AND_PORTS  "sky130_fd_sc_hs__buf_1 A X" 
+
+if { $FOUNDRY == "sky130" } {
+    if { $TRACK == "HS" } {
+        set TIEHI_CELL_AND_PORT     "sky130_fd_sc_hs__conb_1 HI" 
+        set TIELO_CELL_AND_PORT     "sky130_fd_sc_hs__conb_1 LO" 
+        set MIN_BUF_CELL_AND_PORTS  "sky130_fd_sc_hs__buf_1 A X" 
+    } elseif { $TRACK == "HD" } {
+	set TIEHI_CELL_AND_PORT     "sky130_fd_sc_hd__conb_1 HI" 
+        set TIELO_CELL_AND_PORT     "sky130_fd_sc_hd__conb_1 LO" 
+        set MIN_BUF_CELL_AND_PORTS  "sky130_fd_sc_hd__buf_1 A X"
+    }
+} elseif { $FOUNDRY == "nangate45" } {
+    set TIEHI_CELL_AND_PORT     "LOGIC1_X1 Z" 
+    set TIELO_CELL_AND_PORT     "LOGIC0_X1 Z" 
+    set MIN_BUF_CELL_AND_PORTS  "BUF_X1 A Z" 
+} elseif { $FOUNDRY == "asap7" } {
+    set TIEHI_CELL_AND_PORT     "TIEHIx1_ASAP7_75t_R H" 
+    set TIELO_CELL_AND_PORT     "TIELOx1_ASAP7_75t_R L" 
+    set MIN_BUF_CELL_AND_PORTS  "BUFx2_ASAP7_75t_R A Y" 
+}
+
 set VERILOG_INCLUDE_DIRS "\
 "
 set VERILOG_FILES " \

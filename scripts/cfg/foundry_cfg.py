@@ -15,6 +15,117 @@ import subprocess
 import re
 from   data_def import *
 
+#----------------------------------------------------------
+# nangate45
+#----------------------------------------------------------
+nangate45 = Foundry(
+    name='nangate45',
+    lib = {
+        'std,HD,TYP': (
+            'foundry/nangate45/lib/NangateOpenCellLibrary_typical.lib',
+        ),
+        'dontuse'   : 'TAPCELL_X1 FILLCELL_X1 AOI211_X1 OAI211_X1',
+        'macro,TYP' : (
+            'foundry/nangate45/lib/fakeram45_32x64.lib',
+            'foundry/nangate45/lib/fakeram45_64x7.lib',
+            'foundry/nangate45/lib/fakeram45_64x15.lib',
+            'foundry/nangate45/lib/fakeram45_64x21.lib',
+            'foundry/nangate45/lib/fakeram45_64x32.lib',
+            'foundry/nangate45/lib/fakeram45_64x96.lib',
+            'foundry/nangate45/lib/fakeram45_256x34.lib',
+            'foundry/nangate45/lib/fakeram45_256x95.lib',
+            'foundry/nangate45/lib/fakeram45_256x96.lib',
+            'foundry/nangate45/lib/fakeram45_512x64.lib',
+            'foundry/nangate45/lib/fakeram45_1024x32.lib',
+            'foundry/nangate45/lib/fakeram45_2048x39.lib'
+        ),
+    },
+    lef = {
+        'tech'      : (
+            'foundry/nangate45/lef/NangateOpenCellLibrary.tech.lef',
+        ),
+        'std,HD'    : (
+            'foundry/nangate45/lef/NangateOpenCellLibrary.macro.mod.lef',
+        ),
+        'macro'     : (
+            'foundry/nangate45/lef/fakeram45_32x64.lef',
+            'foundry/nangate45/lef/fakeram45_64x7.lef',
+            'foundry/nangate45/lef/fakeram45_64x15.lef',
+            'foundry/nangate45/lef/fakeram45_64x21.lef',
+            'foundry/nangate45/lef/fakeram45_64x32.lef',
+            'foundry/nangate45/lef/fakeram45_64x96.lef',
+            'foundry/nangate45/lef/fakeram45_256x34.lef',
+            'foundry/nangate45/lef/fakeram45_256x95.lef',
+            'foundry/nangate45/lef/fakeram45_256x96.lef',
+            'foundry/nangate45/lef/fakeram45_512x64.lef',
+            'foundry/nangate45/lef/fakeram45_1024x32.lef',
+            'foundry/nangate45/lef/fakeram45_2048x39.lef'
+        )
+    },
+    gds = {
+        'std,HD'    : (
+            'foundry/nangate45/gds/NangateOpenCellLibrary.gds',
+        ),
+        'macro'     : (
+        )
+    }
+)
+
+
+#----------------------------------------------------------
+# asap7
+#----------------------------------------------------------
+asap7 = Foundry(
+    name='asap7',
+    lib = {
+        'std,HS,MAX': (
+            'foundry/asap7/lib/asap7sc7p5t_AO_RVT_SS_nldm_201020.lib',
+            'foundry/asap7/lib/asap7sc7p5t_INVBUF_RVT_SS_nldm_201020.lib',
+            'foundry/asap7/lib/asap7sc7p5t_OA_RVT_SS_nldm_201020.lib',
+            'foundry/asap7/lib/asap7sc7p5t_SEQ_RVT_SS_nldm_201020.lib',
+            'foundry/asap7/lib/asap7sc7p5t_SIMPLE_RVT_SS_nldm_201020.lib'
+        ),
+        'std,HS,TYP': (
+            'foundry/asap7/lib/asap7sc7p5t_AO_RVT_TT_nldm_201020.lib',
+            'foundry/asap7/lib/asap7sc7p5t_INVBUF_RVT_TT_nldm_201020.lib',
+            'foundry/asap7/lib/asap7sc7p5t_OA_RVT_TT_nldm_201020.lib',
+            'foundry/asap7/lib/asap7sc7p5t_SEQ_RVT_TT_nldm_201020.lib',
+            'foundry/asap7/lib/asap7sc7p5t_SIMPLE_RVT_TT_nldm_201020.lib'
+        ),
+        'std,HS,MIN': (
+            'foundry/asap7/lib/asap7sc7p5t_AO_RVT_FF_nldm_201020.lib',
+            'foundry/asap7/lib/asap7sc7p5t_INVBUF_RVT_FF_nldm_201020.lib',
+            'foundry/asap7/lib/asap7sc7p5t_OA_RVT_FF_nldm_201020.lib',
+            'foundry/asap7/lib/asap7sc7p5t_SIMPLE_RVT_FF_nldm_201020.lib',
+            'foundry/asap7/lib/asap7sc7p5t_SEQ_RVT_FF_nldm_201020.lib'
+        ),
+        'dontuse'   : '*x1_ASAP7* *x1p*_ASAP7* *xp*_ASAP7* SDF* ICG* DFFH* AO21* *SRAM*',
+        'macro,MAX' : (
+        ),
+        'macro,TYP' : (
+        ),
+        'macro,MIN' : (
+        ),
+    },
+    lef = {
+        'tech'      : (
+            'foundry/asap7/lef/asap7_tech_1x_201209.lef',
+        ),
+        'std,HS'    : (
+            'foundry/asap7/lef/asap7sc7p5t_27_R_1x_201211.lef',
+        ),
+        'macro'     : (
+        )
+    },
+    gds = {
+        'std,HS'    : (
+            'foundry/asap7/gds/asap7sc7p5t_27_R_1x_201211.gds',
+        ),
+        'macro'     : (
+        )
+    }
+)
+
 #-----------------------------------------------------------
 # SMIC110
 #-----------------------------------------------------------

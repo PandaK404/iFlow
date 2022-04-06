@@ -108,15 +108,19 @@ class Flow(object):
         self.step           = ('synth','floorplan','tapcell','pdn','gplace','resize','dplace','cts','filler','groute','droute','layout')
         self.tool           = {
             'synth'     :   'yosys_0.9'         ,
-            'floorplan' :   'openroad_1.1.0'    ,
-            'tapcell'   :   'openroad_1.1.0'    ,
-            'pdn'       :   'openroad_1.1.0'    ,
-            'gplace'    :   'openroad_1.1.0'    ,
-            'resize'    :   'openroad_1.1.0'    ,
-            'dplace'    :   'openroad_1.1.0'    ,
-            'cts'       :   'openroad_0.9.0'    ,
-            'filler'    :   'openroad_1.1.0'    ,
+            'v2def'     :   'openroad_1.2.0'    ,
+            'floorplan' :   'openroad_1.2.0'    ,
+#            'floorplan' :   'iFP'               ,
+            'tapcell'   :   'openroad_1.2.0'    ,
+            'pdn'       :   'openroad_1.2.0'    ,
+            'gplace'    :   'openroad_1.2.0'    ,
+            'resize'    :   'openroad_1.2.0'    ,
+            'dplace'    :   'openroad_1.2.0'    ,
+            'cts'       :   'openroad_1.2.0'    ,
+            'filler'    :   'openroad_1.2.0'    ,
+#            'groute'    :   'iGR'    ,
             'groute'    :   'openroad_1.2.0'    ,
+#            'droute'    :   'iDR'    ,
             'droute'    :   'openroad_1.2.0'    ,
             'layout'    :   'klayout_0.26.2'   
         }

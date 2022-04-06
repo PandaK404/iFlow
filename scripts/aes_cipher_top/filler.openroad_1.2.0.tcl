@@ -8,6 +8,18 @@ source ../../scripts/common/set_env.tcl
 #===========================================================
 set FILL_CELLS  "sky130_fd_sc_hs__fill_1 sky130_fd_sc_hs__fill_2 sky130_fd_sc_hs__fill_4 sky130_fd_sc_hs__fill_8 " 
 
+if { $FOUNDRY == "sky130" } {
+    if { $TRACK == "HS" } {
+        set FILL_CELLS        "sky130_fd_sc_hs__fill_1 sky130_fd_sc_hs__fill_2 sky130_fd_sc_hs__fill_4 sky130_fd_sc_hs__fill_8 "
+    } elseif { $TRACK == "HD" } {
+        set FILL_CELLS        "sky130_fd_sc_hd__fill_1 sky130_fd_sc_hd__fill_2 sky130_fd_sc_hd__fill_4 sky130_fd_sc_hd__fill_8 "
+    }   
+} elseif { $FOUNDRY == "nangate45" } {
+    set FILL_CELLS        "FILLCELL_X1 FILLCELL_X2 FILLCELL_X4 FILLCELL_X8 FILLCELL_X16 FILLCELL_X32 "
+} elseif { $FOUNDRY == "asap7" } {
+    set FILL_CELLS        "FILLERxp5_ASAP7_75t_R"
+}
+
 #===========================================================
 #   main running
 #===========================================================
