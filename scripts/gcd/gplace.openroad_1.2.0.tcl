@@ -14,7 +14,7 @@ if { $FOUNDRY == "sky130" } {
     set WIRE_RC_LAYER "M3"
 }
 
-set PLACE_DENSITY   "0.3"
+set PLACE_DENSITY   "0.5"
 
 #===========================================================
 #   main running

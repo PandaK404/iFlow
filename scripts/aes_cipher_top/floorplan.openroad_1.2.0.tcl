@@ -8,8 +8,8 @@ source ../../scripts/common/set_env.tcl
 #===========================================================
 set DIE_AREA            "0 0 1120 1020.8" 
 set CORE_AREA           "10 12 1110 1011.2" 
-#set DIE_AREA            "0 0 220.2 220.2" 
-#set CORE_AREA           "1.08 1.08 219.12 219.12" 
+#set DIE_AREA            "0 0 100 100" 
+#set CORE_AREA           "1.08 1.08 99.12 99.12" 
 
 set TRACKS_INFO_FILE    "$PROJ_PATH/foundry/$FOUNDRY/tracks_1.2.0.info" 
 
