@@ -31,7 +31,7 @@ export IFLOW_MIRROR_URL
 source $IFLOW_SHELL_DIR/common.sh
 
 # essential package
-RUN sudo apt install build-essential clang libreadline6-dev bison flex libffi-dev cmake libboost-all-dev swig klayout libeigen3-dev libspdlog-dev -y
+RUN sudo apt install build-essential clang libreadline-dev bison flex libffi-dev cmake libboost-all-dev swig klayout libeigen3-dev libspdlog-dev -y
 
 # tcl
 RUN sudo apt install tcl-dev -y
