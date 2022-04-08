@@ -1,9 +1,9 @@
 *
 !.gitignore
 !sky130
-!sky130/*
+!sky130/**
 !nangate45
-!nangate45/*
+!nangate45/**
 !asap7
-!asap7/*
+!asap7/**
 merge*
