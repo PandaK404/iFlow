@@ -565,7 +565,7 @@ asap7是开源的7nm工艺，因此我们需要把floorplan面积调得更小，
 
 图46：
 
-
+![输入图片说明](.image/%E5%9B%BE%E7%89%8746.png)
 
 大家也可以尝试一下用asap7工艺去跑uart设计，但不建议用来尝试aes_cipher_top设计，因为aes_cipher_top设计比较大，droute步骤会存在很多DRC违例，工具在解DRC时需要花费大量时间，可能还绕不通线。
 
