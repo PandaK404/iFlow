@@ -184,155 +184,182 @@ iFlow的配置脚本目录为“iFlow/scripts/cfg”，目录下有四个脚本�
 
 #### （2）flow_cfg.py
 
-Klayout支持直接打开def文件，gds载入比较慢，可以直接用klayout打开def文件。输入命令“klayout”打开klayout的GUI，在菜单“File/Import”的子菜单中找到导入功能，选择DEF/LEF导入def文件以及lef文件。如图3所示，在弹窗的“Import File”中选择detail route生成的def文件导入，在“With LEF files:”中添加design中用到的lef文件，在“/iFlow/foundry/sky130/lef/中可以找到”，添加完毕后点“OK”即可导入。产生的结果如图4所示，由于def中没有merge “std cell”和“marcro”的gds文件，因此只有metal层和via，看不到底层的NW、CT、GT等，“std cell”和“marcro”的内部结构是固定的，直接调用，一般我们只关心布线结果，所以这里看def的结果足矣。
+这个脚本中定义了一些Flow的默认参数，如图3所示，定义了4个Flow的默认设置，例如，在运行aes_cipher_top这个设计的综合时，可以不设置工艺相关的参数，直接运行命令：
+```
+./run_flow.py -d aes_cipher_top -s synth
+```
+这时会使用默认的“foundry”、“track”、“corner”运行流程，分别为“sky130”、“HS”、“TYP”。用户可以根据需求进行自定义，或者在运行“run_flow.py”脚本时设定相应的参数。在运行不同设计的流程时，顶层脚本会根据设计名在“iFlow/scripts”目录下查找以设计顶层module名一致的目录，读取相应步骤的脚本，如图4所示，在“iFlow/scripts/aes_cipher_top”目录下有不同步骤及不同工具版本的tcl脚本。
 
 图3：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p3-1.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%873.png)
 
 
 图4：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p4-1.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%874.png)
 
-### 2、输出的结果
-每一步的结果将输出到“/iFlow/result”目录下，如图5所示。
+#### （3）foundry_cfg.py
 
-synth：RTL综合，生成综合后的网表文件；
-
-floorplan：布局规划，生成描述物理位置关系的def和更新网表文件；
-
-tapcell：插入physical cell，生成描述物理位置关系的def和更新网表文件；
-
-pdn：构建电源网络，生成描述物理位置关系的def和更新网表文件；
-
-gplace：放置标准单元，生成描述物理位置关系的def和更新网表文件；
-
-resize：优化标准单元的尺寸，生成描述物理位置关系的def和更新网表文件；
-
-dplace：优化标准单元的摆放，消除overflow，生成描述物理位置关系的def和更新网表文件；
-
-cts：构建时钟树，生成描述物理位置关系的def和更新网表文件；
-
-filler：插入filler cell，生成描述物理位置关系的def和更新网表文件；
-
-groute：为detail rout生成引导guide文件，生成描述物理位置关系的def和更新网表文件；
-
-droute：根据guide文件进行布线，生成描述物理位置关系的def和更新网表文件；
-
-layout：生成gds文件。
+这个脚本中定义了不同工艺节点的库文件路径，运行流程时会根据所选择的工艺节点“foundry”参数，到这个脚本里找到对应工艺节点的库文件路径进行读取。如图5所示，为sky130工艺的库文件配置，包含了“name”、“lib”、“lef”、“gds”四个属性，运行流程时，会根据不同的track和corner选择读入哪些库文件。sky130中默认只配置了TYP一种corner，也只有一种corner，对于其他含有多个corner的工艺库，用户可以根据需要，添加其它corner的lib库，以及添加需要的sram的lib库、lef库和gds库。
 
 图5：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p5-1.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%875.png)
 
-### 3、输出的报告
-每一步输出的报告可以在“/iFlow/report/”目录下查看，例如，进入“/iFlow/report/aes_cipher_top.floorplan.openroad_1.1.0.HS.TYP.1.0”目录下，查看floorplan生成的报告“init.rpt”，如图6所示，可以得到floorplan后的wns、tns以及utilization等参数。
+#### （4）tools_cfg.py
+
+这个脚本用于配置每一步使用哪种开源EDA工具及其对应的版本号，如图6所示，这里配置了三种不同版本的OpenRoad工具，OpenROAD的1.2.0版本更新之后相关的命令和1.1.0版本有一定的差别，iFlow默认使用1.1.0版本的OpenROAD，只提供了1.1.0版本的脚本，想尝试别的版本可到OpenROAD的git hub地址（https://github.com/The-OpenROAD-Project/OpenROAD）去了解相关命令。为了方便可以在“data_def.py”脚本中定义每一步使用的默认工具，也可以用命令指定使用工具的版本，例如：
+```
+./run_flow.py -d aes_cipher_top -s floorplan=openroad_1.1.0
+```
+运行此命令指定使用1.1.0版本的OpenRoad工具进行floorplan。此外，iFlow还配置了iEDA点工具，也可以尝试使用iEDA的工具实现后端物理设计，相应的使用示例我们也会在后续更新。
 
 图6：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p6-1.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%876.png)
 
-### 4、查看某一步的结果
-为了验证某一步的结果是否满足我们的要求，可以对单步的结果进行检查。例如，我们可以查看detail place之后的结果。和前面提过的步骤一样，打开klayout，在“Import File”中导入dplace结果中的def文件，如图7所示。
+## 五、iFlow流程介绍
+### 3、综合
+iFlow使用的综合工具是yosys，版本号为4be891e8。综合的目的是将RTL代码转化为网表，在iFlow中，RTL代码放在“iFlow/rtl”中，RTL代码的目录用顶层module名称来命名。在运行综合流程之前，首先要确认综合脚本中的配置是否正确。以gcd设计为例，进入“iFlow/scripts/gcd”目录，打开综合流程相关的tcl脚本，用户需要重点关注的部分参数配置在脚本的前面，如图7所示。
 
 图7：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p7-1.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%877.png)
 
-点击“OK”后，可以先在“Layers”选择“hide all”，再双击打开“OUTLINE”层，即可看到detail place后的结果（这里金属层为电源网络，隐藏金属层可以方便我们查看detail place的结果），如图8所示。同样的方法可以查看其他步的结果。
+首先，要配置好综合需要读入的库文件，例如blackbox的verilog文件和map文件等等，然后，还需要对一些综合时要用到的特定的cell也要在这里进行配置，包括tie cell和buffer。最后，还需要配置RTL代码所在的路径。
 
 图8：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p8-1.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%878.png)
 
-## 五、更换库、设计、工具
-### 1、数据的定义
-“/iFlow/scripts/cfg”目录下，“data_def.py”脚本定义了iFlow使用的三个主要数据：Foundry、Tools、Flow，如图9所示，定义了每一步使用的默认工具。
+综合相关的命令如图8所示，包括综合、优化以及mapping三个主要步骤，其中abc在优化时需要读入时序约束sdc文件，这个文件需要放在“iFlow/rtl”目录中对应的设计目录下，用于综合时进行时序优化。跑单步综合命令如下：
+```
+./run_flow.py -d gcd -s synth 
+```
+
+### 4、布局
+iFlow中布局包括六个小步骤，分别为floorplan、tapcell、PDN、gplace、resize、dplace，在默认情况下，必须按照上述步骤的顺序进行流程，用户也可以根据需求通过修改顶层脚本的“-s”和“-p”参数来修改当前步骤及前一步骤。在布局规划中，目的是为了规划芯片的面积及形状，并将综合后输出的网表中所包含的instance摆放到芯片上。接下来将一一讲述布局中的各个步骤：
+
+#### （1）floorplan
+
+在floorplan这一步中，主要是进行芯片的面积以及形状的规划，配置参数“DIE_AREA”和“CORE_AREA”，如图9所示。
 
 图9：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p9.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%879.png)
 
-### 2、更换工艺库
-在“/iFlow/scripts/cfg”目录下，“foundry_cfg.py”脚本配置flow需要用到的工艺库文件（lib、lef、gds），如图10和图11所示，当需要更换工艺库时，可以在此脚本中添加配置即可。
+在floorplan阶段，会根据工艺相关的techfile文件生成Row和Site，这里选择的Site类型为“unit”，如图10所示。此外，floorplan阶段还会生成用于走线的track，因此还需要在“iFlow/foundry/$FOUNDRY”目录下配置track对应的参数，如图11所示，sky130工艺一共有6层金属，这里对它们的走线track进行了定义。
 
 图10：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p10-1.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%8710.png)
 
 图11：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p11-1.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%8711.png)
 
-### 3、更换设计RTL
-进入到“/iFlow/scripts/”目录下，创建相应design的脚本文件目录，将“aes_cipher_top”文件夹中“synth.yosys_0.9.tcl”脚本拷贝到新的design目录下，修改“synth.yosys_0.9.tcl”脚本中的RTL配置即可，如图12所示，更换design的Verilog文件。
+完成了参数的配置后，需要进行floorplan的初始化，生成相应的Die、Core及Row等等，OpenRoad的floorplan初始化有三种，可以根据设置好的策略进行初始化，可以根据设定的利用率进行初始化，还可以根据设定的“DIE_AREA”和“CORE_AREA”进行初始化，iFlow的floorplan脚本默认情况下，采用第三种，如图12红框中所示。
 
 图12：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p12-1.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%8712.png)
 
-### 4、更换工具
-在“/iFlow/scripts/cfg”目录下，“tools_cfg.py”脚本中配置了每一步可以使用的工具及其所在路径，如图13所示。当要更换工具或者更换新版本工具时，增加新的工具的定义即可。
+跑单步floorplan命令如下：
+```
+./run_flow.py -d gcd -s floorplan -p synth  
+```
+
+#### （2）tapcell
+在floorplan初始化之后，需要在core area范围内插入tapcell，tapcell的作用是为所有标准单元的N阱和衬底提供偏置电源，在core area范围内每间隔一段距离则需要摆放一个tapcell，在tapcell这一步还需要插入endcap，主要是为了插在边界处或sram及ip周围消除不对称性，在脚本中对应的配置如图13所示，这里需要配置摆放tapcell的间距，以及tapcell和endcap选用的标准单元的类型，这些参数可以在脚本前面设置，如图14所示。
 
 图13：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p13.png)
-
-## 六、Flow脚本说明
-主要说明“run_flow.py”这个脚本每一步大概作用，
-### 1、参数的解析和验证
-开头部分为参数的解析和验证，如图14所示，这里定义了“run_flow.py”这个脚本运行时需要的参数，包括：“design、step、prestep、foundry、track、corner、version、preversion”。输入命令：
-```
-run_flow.py -h
-```
-可以得到可选参数的具体说明，如图15所示，当需要跑aes_cipher_top的综合时，我们可以输入命令:
-```
-./run_flow.py -d aes_cipher_top -s synth -f sky130 -t HS -c TYP -v 1.0
-```
-生成的log、report和result也会以相应的参数命名，如：“aes_cipher_top.synth.yosys_0.9.HS.TYP.1.0.log”。
-
-·当需要同时跑多步时，可以以逗号“，”分隔，如同时跑synth和floorplan时，可以输入命令：
-```
-./run_flow.py -d aes_cipher_top -s synth,floorplan -f sky130 -t HS -c TYP -v 1.0
-```
-·当需要指定使用工具openroad_0.9.0进行floorplan时（默认使用openroad_1.1.0），可以输入命令：
-```
-./run_flow.py -d aes_cipher_top -s floorplan=openroad_0.9.0
-```
+![输入图片说明](.image/%E5%9B%BE%E7%89%8713.png)
 
 图14：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p14.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%8714.png)
+
+跑单步tapcell命令如下：
+```
+./run_flow.py -d gcd -s tapcell -p floorplan 
+```
+
+#### （3）PDN
+在布局中，除了面积规划及标准单元的摆放之外，还有相当重要的一步为power plan，又称为PDN，这一步主要是构建为整个芯片供电的电源网络，一个芯片的电源网络质量直接影响整个芯片的性能。PDN这一步的脚本比较简单，只有一条简单的命令，如图15所示，与电源网络相关的配置在“pdn_$FOUNDRY.cfg”配置文件中，对于使用不同的工艺库，电源网络的构建不同。
 
 图15：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p15-1.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%8715.png)
 
-### 2、设置环境变量和创建路径
-如图16所示，这里主要设置环境变量以及创建相应的工作路径、结果输出的的路径以及库文件所在路径。
+Sky130工艺的配置文件中具体的内容如图16所示。在“pdn_sky130.cfg”配置文件中，首先要创建电源相关的net，包括“VDD”和“VSS”，如图16中红框所示，然后需要把与电源相关的pin从逻辑上连接到“VDD”和“VSS”两个net上，如图16中绿框所示，最后是构建电源网络的power stripe，在这个工艺下，构建了用于标准单元供电的met1 power rail和met4、met5的power stripe，如图16中橙框所示。此外，在含有macro的设计中，我们还需要将marco中的电源连接到芯片的电源网络上，从而为marco供电。
 
 图16：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p16.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%8716.png)
 
-### 3、预处理文件
-如图17所示，由于yosys中的abc工具只能读一个.lib文件，因此在使用yosys要先执行mergeLib.pl脚本，将所有用到的.lib文件合并为一个.lib文件“merged.lib”。同样的，TritonRoute工具也只能读入一个.lef文件，需要将所用到的.lef文件合并为一个.lef文件“merged_spacing.lef”。
+跑单步pdn命令如下：
+```
+./run_flow.py -d gcd -s pdn -p tapcell 
+```
+
+#### （4）gplace
+在完成电源网络的构建后，接下来需要将标准单元摆放到core area范围中，这一步即为gplace，又称为global place。在gplace阶段，需要配置的主要参数有两个，如图17所示，一个为线RC参数的抽取层，主要是为了在gplace阶段抽
+取线RC参数进行延时的评估，从而更好地优化标准单元的摆放位置；另一个为“PLACE_DENSITY”，这一参数是用于设置摆放标准单元时的密度，即标准单元摆放的紧密程度。
 
 图17：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p17.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%8717.png)
 
-### 4、逐步运行
-如图18所示，根据不同的“step”运行不同的工具以及脚本，Openroad中不包含detailroute和看版图的工具，detailroute使用TritonRoute工具，看版图使用klayout工具。
+运行gplace的命令如图18所示，overflow参数默认为0.1，用户也可以自行定义。在gplace阶段，是不会去修复所有的单元重叠，标准单元的合法化需要到dplace阶段才会实现，在gplace阶段，会不断对标准单元的位置进行优化迭代，直到overflow达到所设定的值，如图19所示，经过420次迭代后满足设定的overflow值0.01。
 
 图18：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p18-1.png)
-
-### 5、后处理
-每一步跑完后更新变量“prestep_sel”和“pre_tool_name”，如图19所示。
+![输入图片说明](.image/%E5%9B%BE%E7%89%8718.png)
 
 图19：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p19.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%8719.png)
+
+跑单步gplace命令如下：
+```
+./run_flow.py -d gcd -s gplace -p pdn 
+```
+
+#### （5）resize
+resize这一步骤主要是在dplace前，进行一部分标准单元的更换及插入，其中包括将逻辑0和逻辑1的驱动端加上Tie cell和在需要fix fanout的驱动端加上buffer。resize阶段需要配置的参数主要有“MAX_FANOUT”以及fix fanout时需要用到的Tie cell和buffer类型，如图20所示。
+
+图20：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8720.png)
+
+在iFlow的resize流程中，主要是进行fanout的修复，降低fanout以增加各级的驱动能力，具体的命令如图21所示。此外，还可以通过命令指定修复cap和slew所用的buffer类型，分别为“repair_max_cap -buffer_cell $buffer_cell”、“repair_max_slew -buffer_cell $buffer_cell”。
+
+图21：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8721.png)
+
+跑单步resize命令如下：
+```
+./run_flow.py -d gcd -s resize -p gplace 
+```
+
+#### （6）dplace
+iFlow中dplace的主要作用是对gplace阶段已经摆放的标准单元进行合法化，消除标准单元之间的重叠，将标准单元对齐到core area范围内的Row上，从而确保电源网络能为标准单元供电，又称为detail place。dplace流程的主要命令为“detailed_placement”，dplace这一步只是将标准单元位置进行合法化，因此不需要设置参数。
+跑单步dplace命令如下：
+```
+./run_flow.py -d gcd -s dplace -p resize 
+```
+
+### 5、CTS
+CTS的全称为Clock Tree Synthesis，时钟树综合，这是后端物理设计的一个关键步骤，EDA工具会根据时序约束文件，创建真实的时钟，并构建时钟树，目的是通过插入buffer或inverter的方法使得同一时钟域到各个寄存器时钟端的延迟尽可能保持一致，即时钟skew尽可能小。进行CTS流程前，需要设置用于构建时钟树的buffer的cell类型，如图22所示。
+
+图22：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8722.png)
+
+与CTS相关的主要命令如图23所示，构建时钟树之前需要先对原有的buffer和inverter进行resize操作，即通过更换buffer和inverter的尺寸已增强驱动能力，在时钟树综合时再根据所需插入buffer和inverter，时钟树构建之后，这时已有实际的时钟，使用命令“repair_clock_nets”修cap，slew和skew。此外，还需要重新进行一次dplace，因为CTS时会插入buffer和inverter，需要再次dplace来保证标准单元位置摆放的合法化。
+
+图23：
+
