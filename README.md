@@ -459,6 +459,7 @@ gcd(greatest common denominator)是一个计算最小公分母的设计，是一
 
 ## 二、uart设计
 uart设计是一种通用串行数据总线的设计，是一个百门级到千门级的设计，用于异步通信。下面将讲述一下如何将iFlow中的design更换为uart设计。
+
 首先，需要把uart相关的rtl代码放在“iFlow/rtl”目录下，如图34所示，然后要定义uart设计的flow，进入到“iFlow/scripts/cfg”目录下，编辑脚本“flow_cfg.py”，加入uart设计的默认flow参数，如图35所示，这里设置的默认foundry为“asap7”，改为“sky130”也是可以的。
 
 图34：
@@ -520,6 +521,7 @@ picorv32代码源地址：https://github.com/YosysHQ/picorv32
 # 开源EDA流程iFlow使用示例——更换工艺库
 ## 一、nangate45
 Nangate45 PDK的源地址为：https://eda.ncsu.edu/freepdk/。在iFlow中的nangate45工艺库是经过整理的。
+
 要想用nangate45工艺库来设计后端，首先要将nangate45工艺库加到iFlow中，将nangate45工艺库整理后放在“iFlow/foundry”目录下。然后进入“iFlow/scripts/cfg”目录，编辑脚本“foundry_cfg.py”，配置好lib、lef和gds库的路径以及综合阶段需要禁掉的单元列表“don’t use list”。
 
 图41：
@@ -539,4 +541,61 @@ Nangate45 PDK的源地址为：https://eda.ncsu.edu/freepdk/。在iFlow中的nan
 基于nangate45工艺跑aes_cipher_top设计的后端结果如图43所示。
 
 图43：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8743.png)
+
+## 二、asap7
+asap7的源地址为：https://asap.asu.edu/。在iFlow中的asap7工艺库是经过整理的。
+
+asap7是开源的7nm工艺，因此我们需要把floorplan面积调得更小，以保证在一定的利用率下能够顺利布线，和nangate45工艺类似，修改相应的脚本参数之后，如图44和45所示，
+
+图44：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8744.png)
+
+图45：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8745.png)
+
+运行命令：
+```
+./run_flow.py -d gcd -s synth,floorplan,tapcell,pdn,gplace,resize,dplace,cts,filler,groute,droute,layout -f asap7 -t HS -c TYP -v V1 -l V1
+```
+即可完成基于asap7工艺跑gcd设计的后端流程，droute步骤大约需要两小时，结果如图46所示。
+
+图46：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8746.png)
+
+大家也可以尝试一下用asap7工艺去跑uart设计，但不建议用来尝试aes_cipher_top设计，因为aes_cipher_top设计比较大，droute步骤会存在很多DRC违例，工具在解DRC时需要花费大量时间，可能还绕不通线。
+
+# 开源EDA流程iFlow使用示例——更换工具（iEDA）
+## 一、工具导入及存放
+iEDA工具已经嵌套在iFlow中，更换工具时，首先需要把工具放在“iFlow/tools/”目录下，如图47所示，iEDA_0.1版本已经放在“iFlow/tools/”目录下，
+
+图47：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8747.png)
+
+## 二、配置工具相关参数
+将iEDA工具的路径配置到脚本“iFlow/scripts/cfg/ tools_cfg.py”中，配置iEDA工具可以完成的后端流程步骤，配置iEDA工具的版本号，如图48所示。
+
+图48：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8748.png)
+
+## 三、Flow步骤定义
+定义使用iEDA工具时的flow步骤，如图49所示，在使用iEDA工具时，flow的步骤由默认的“synth,floorplan,tapcell,pdn,gplace,resize,dplace,cts,filler,
+groute,droute,layout”变为“synth,v2def,floorplan,fix_fanout,place,cts,fix_drv,opt_hold,route,filler”，这是对应iEDA工具的步骤。iEDA目前只支持后端物理流程，因此，综合依旧使用yosys工具完成。并且，由于iEDA工具目前只支持def文件的输入，这里需要借助OpenRoad工具将综合网表“.v”文件转化为def文件作为iEDA工具的输入。
+
+图49：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8749.png)
+
+## 四、定义工具对应的Flow
+定义Flow时，需要加上flow的标识flag，当要使用默认的flow步骤时，标识flag设为空即可，当要使用iEDA的flow步骤是，将标识flag设为“iEDA”，如图50所示。配置完成之后，再将工具对应的脚本加入到对应的设计脚本目录下即可使用。
+
+图50：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8750.png)
 
