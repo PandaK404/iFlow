@@ -170,11 +170,10 @@ iFlow的顶层脚本为iFlow/scripts/run_flow.py，可以通过选择不同的�
 
 图1：
 
-![输入图片说明](.image%E5%9B%BE%E7%89%871.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%871.png)
 
 图2：   
-
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p2-1.png)
+![输入图片说明](.image/%E5%9B%BE%E7%89%872.png)
 
 Klayout支持直接打开def文件，gds载入比较慢，可以直接用klayout打开def文件。输入命令“klayout”打开klayout的GUI，在菜单“File/Import”的子菜单中找到导入功能，选择DEF/LEF导入def文件以及lef文件。如图3所示，在弹窗的“Import File”中选择detail route生成的def文件导入，在“With LEF files:”中添加design中用到的lef文件，在“/iFlow/foundry/sky130/lef/中可以找到”，添加完毕后点“OK”即可导入。产生的结果如图4所示，由于def中没有merge “std cell”和“marcro”的gds文件，因此只有metal层和via，看不到底层的NW、CT、GT等，“std cell”和“marcro”的内部结构是固定的，直接调用，一般我们只关心布线结果，所以这里看def的结果足矣。
 
