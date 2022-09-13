@@ -363,3 +363,180 @@ CTS的全称为Clock Tree Synthesis，时钟树综合，这是后端物理设计
 
 图23：
 
+![输入图片说明](.image/%E5%9B%BE%E7%89%8723.png)
+
+跑单步CTS命令如下：
+```
+./run_flow.py -d gcd -s cts -p dplace
+```
+
+### 6、filler
+在构建时钟树，并完成timing的修复之后，所有的标准单元已经确认并固定，后续的操作不会改变网表，这时，我们需要在整个core area范围内填满filler cell，主要作用是为了填充标准单元之间的空隙，将整个扩散层连接起来，以满足DRC（Design Rule Check）要求，以构成power rail，使电源和地线保持连接。这一步骤也可以再布线之后进行，在iFlow中，默认是在CTS之后，布线之前进行filler cell的插入，用户可以根据需求进行调整。在进行filler insert操作前，需要设置filler cell的类型，如图24所示，这里一共使用了多种不同大小的filler cell，最小的filler cell宽度与一个Site宽度一致。然后，使用命令“filler_placement $FILL_CELLS”即可填充filler。
+
+图24：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8724.png)
+
+跑单步filler命令如下：
+```
+./run_flow.py -d gcd -s filler -p cts
+```
+
+### 7、布线
+在iFlow中，布线一共分为两步流程，分别是groute和droute，groute生成一个引导布线文件guide，droute读入guide完成实际的布线。
+#### （1）groute
+groute又称为global route，这一步骤会做好布线资源分配，生成布线引导文件“route.guide”。groute主要设置的参数为各金属层在库里面的对应名字，用于确定布线所用层，对于不同的工艺有不同数量的金属层，每层金属的名称也不一样，sky130工艺一共有六层金属层，如图25所示，同时，还需定义用于信号线网和时钟线网的走线层。
+
+图25：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8725.png)
+
+在开始groute前，如果设计中有用到sram等marco，还需要给marco加上routing blockage，避免在布线时外部的走线与marco内部走线重叠而产生短路，如图26所示。加上routing blockage后，便可以开始groute，命令如图27所示，这里设置200次迭代，groute阶段必须保证完全消除overflow，从而避免存在短路现象，否则会使芯片功能错误。
+
+图26：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8726.png)
+
+图27：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8727.png)
+
+跑单步groute命令如下：
+```
+./run_flow.py -d gcd -s groute -p filler
+```
+
+#### （2）droute
+droute流程是将groute输出的route.guide文件读入，并根据guide文件的描述去形成实际布线的过程，又称为detail place。这一步骤的实施主要是依赖groute输出的route.guide文件，因此，没有参数需要设置，读入相应的lef物理库和guide文件之后，便可以开始droute。droute步骤的命令在顶层脚本“run_flow.py”中实现，如图28所示。
+
+图28：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8728.png)
+
+跑单步droute命令如下：
+```
+./run_flow.py -d gcd -s droute -p groute
+```
+
+### 8、版图
+droute完成后输出的是def文件，而不是gds文件，需要得到用于foundry生产的gds文件还需要一个merge的流程，在iFlow中，这一流程命名为“layout”。droute得到的def文件是一个基于金属层层面的描述文件，其中的标准单元、IO cell以及marco等等都是一个黑盒子，只描述了其形状，没有具体的layer层描述，merge流程是将这些黑盒子的gds和def文件进行合并，从而得到最终的gds文件的过程。
+merge过程的具体命令在顶层脚本“run_flow.py”中实现，如图29所示，merge需要读入的文件包括droute输出的def，还有标准单元、IO cell、marco的gds文件，以及工艺的layer map文件klayout.lyt和klayout.lyp，最终输出gds版图。
+
+图29：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8729.png)
+
+跑单步layout（merge）命令如下：
+```
+./run_flow.py -d gcd -s layout -p droute 
+```
+得到gds版图后，可以使用klayout工具查看版图。此外，klayout工具还可以查看def文件，打开klayout的GUI界面后，在菜单“File/Import”的子菜单中选择DEF/LEF导入def文件以及lef文件。如图30所示，在弹窗的“Import File”中选择detail route生成的def文件导入，在“With LEF files:”中添加design中标准单元、IO cell及marco的lef文件，在“iFlow/foundry/sky130/lef”中可以找到，添加完毕后点“OK”即可导入。产生的结果如图31所示，这可以在merge前帮助我们检验布线结果的质量，也可以检查前面每一步之后的结果，包括floorplan、filler等等。
+
+图30：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8730.png)
+
+图31：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8731.png)
+
+klayout也可以直接打开GDS，使用klayout打开GDS的命令如下：
+```
+klayout  xxxx.gds
+```
+
+图32：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8732.png)
+
+# 开源EDA流程iFlow使用示例——更换设计
+## 一、gcd设计
+gcd(greatest common denominator)是一个计算最小公分母的设计，是一个非常小的设计，一个百门级别的芯片。使用sky130工艺库，去实现gcd设计的后端物理设计的流程及运行的命令可以参考上一部分的iFlow介绍。从综合流程的log显示，如图33所示，gcd设计综合后一共有639个cell，是一个非常小的设计。
+
+图33：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8733.png)
+
+## 二、uart设计
+uart设计是一种通用串行数据总线的设计，是一个百门级到千门级的设计，用于异步通信。下面将讲述一下如何将iFlow中的design更换为uart设计。
+首先，需要把uart相关的rtl代码放在“iFlow/rtl”目录下，如图34所示，然后要定义uart设计的flow，进入到“iFlow/scripts/cfg”目录下，编辑脚本“flow_cfg.py”，加入uart设计的默认flow参数，如图35所示，这里设置的默认foundry为“asap7”，改为“sky130”也是可以的。
+
+图34：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8734.png)
+
+图35：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8735.png)
+
+定义好flow之后，我们需要准备uart设计的流程脚本，进入到“iFlow/scripts”目录，运行命令：
+```
+cp -r gcd uart
+```
+拷贝gcd设计的脚本作为uart设计的脚本，再进行相应的参数修改即可。首先，进入“iFlow/scripts/uart”目录，修改综合脚本“synth.yosys_0.9.tcl”，需要把输入的Verilog代码文件改为uart设计的rtl代码，如图36所示。
+
+图36：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8736.png)
+
+由于uart设计的规模和gcd设计非常接近，在使用sky130工艺的情况下，我们可以沿用gcd设计的floorplan设置，也可以适当的调节DIE_AREA和CORE_AREA，如图37所示，
+
+图37：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8737.png)
+
+其余的步骤可以不用修改，进入目录“iFlow/scripts”，运行命令：
+```
+./run_flow.py -d uart -s synth,floorplan,tapcell,pdn,gplace,resize,dplace,cts,filler,groute,droute,layout -f sky130 -t HS -c TYP -v V1 -l V1
+```
+即可基于sky130工艺跑uart设计的后端流程，结果如图38所示。
+
+图38：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8738.png)
+
+## 三、aes_cipher_top设计
+aes_cipher_top是一个加密算法的小模块，相对于前面两个设计，aes_cipher_top的规模要大很多，是一个万门级的设计。与uart设计一样，首先要修改综合脚本中的Verilog代码路径，然后调整floorplan，增大芯片的面积，如图39所示。
+
+图39：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8739.png)
+
+然后进入目录“iFlow/scripts”，运行命令
+```
+./run_flow.py -d aes_cipher_top -s synth,floorplan,tapcell,pdn,gplace,resize,dplace,cts,filler,groute,droute,layout -f sky130 -t HS -c TYP -v V1 -l V1
+```
+即可完成基于sky130工艺跑aes_cipher_top设计的后端流程，结果如图40所示，这个设计比较大，后端流程中droute步骤需要比较长的时间，大约需要一个小时。
+
+图40：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8740.png)
+
+# 练习：picorv32设计更换并跑通后端流程
+picorv32是一个实现RISC-V RV32IMC指令集的CPU内核，大家可以尝试更换picorv32设计跑后端流程。
+
+picorv32代码源地址：https://github.com/YosysHQ/picorv32
+
+# 开源EDA流程iFlow使用示例——更换工艺库
+## 一、nangate45
+Nangate45 PDK的源地址为：https://eda.ncsu.edu/freepdk/。在iFlow中的nangate45工艺库是经过整理的。
+要想用nangate45工艺库来设计后端，首先要将nangate45工艺库加到iFlow中，将nangate45工艺库整理后放在“iFlow/foundry”目录下。然后进入“iFlow/scripts/cfg”目录，编辑脚本“foundry_cfg.py”，配置好lib、lef和gds库的路径以及综合阶段需要禁掉的单元列表“don’t use list”。
+
+图41：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8741.png)
+
+然后需要在脚本中加入nangate45工艺库的参数设置，这里用aes_cipher_top设计的综合脚本举例，如图42所示，对于不同的工艺库，所用到的TIE cell和buffer名称是不一样的，需要根据工艺库进行修改，对于其他步骤的脚本也是如此。
+
+图42：
+
+![输入图片说明](.image/%E5%9B%BE%E7%89%8742.png)
+
+其中电源网络的脚本，需要引用nangate45工艺的电源网络配置“pdn_nangate45.cfg”，因为每个工艺电源网络的配置差别是比较大的。脚本参数修改完之后，运行命令：
+```
+./run_flow.py -d aes_cipher_top -s synth,floorplan,tapcell,pdn,gplace,resize,dplace,cts,filler,groute,droute,layout -f nangate45 -t HD -c TYP -v V1 -l V1
+```
+基于nangate45工艺跑aes_cipher_top设计的后端结果如图43所示。
+
+图43：
+
