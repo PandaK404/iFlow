@@ -575,14 +575,14 @@ iEDA工具已经嵌套在iFlow中，更换工具时，首先需要把工具放�
 
 图47：
 
-
+![输入图片说明](.image/%E5%9B%BE%E7%89%8747.png)
 
 ## 二、配置工具相关参数
 将iEDA工具的路径配置到脚本“iFlow/scripts/cfg/ tools_cfg.py”中，配置iEDA工具可以完成的后端流程步骤，配置iEDA工具的版本号，如图48所示。
 
 图48：
 
-
+![输入图片说明](.image/%E5%9B%BE%E7%89%8748.png)
 
 ## 三、Flow步骤定义
 定义使用iEDA工具时的flow步骤，如图49所示，在使用iEDA工具时，flow的步骤由默认的“synth,floorplan,tapcell,pdn,gplace,resize,dplace,cts,filler,
@@ -590,12 +590,12 @@ groute,droute,layout”变为“synth,v2def,floorplan,fix_fanout,place,cts,fix_d
 
 图49：
 
-
+![输入图片说明](.image/%E5%9B%BE%E7%89%8749.png)
 
 ## 四、定义工具对应的Flow
 定义Flow时，需要加上flow的标识flag，当要使用默认的flow步骤时，标识flag设为空即可，当要使用iEDA的flow步骤是，将标识flag设为“iEDA”，如图50所示。配置完成之后，再将工具对应的脚本加入到对应的设计脚本目录下即可使用。
 
 图50：
 
-
+![输入图片说明](.image/%E5%9B%BE%E7%89%8750.png)
 
