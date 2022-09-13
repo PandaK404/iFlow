@@ -158,18 +158,19 @@ layout：
 ```
 run_flow.py -d $design -s layout -f $foundry -t $track -c $corner
 ```
+iFlow还可以根据用户的需求及使用的EDA工具来自定义后端流程的步骤step，具体操作见《开源EDA流程iFlow使用示例——更换工具》篇。
 
-## 四、Example
-### 1、使用iFlow跑aes_cipher_top设计的全流程
-进入“/iFlow/scripts/”目录，输入命令：
+## 四、iFlow顶层脚本介绍
+### 1、顶层脚本
+iFlow的顶层脚本为iFlow/scripts/run_flow.py，可以通过选择不同的参数，包括“design”、“step”、“prestep”、“foundry”、“track”、“corner”、“version”、“preversion”，来运行不同设计、不同步骤或不同工艺等等的流程。进入“iFlow/scripts”目录下，运行命令：
 ```
-./run_flow.py -d aes_cipher_top -s synth,floorplan,tapcell,pdn,gplace,resize,dplace,cts,filler,groute,droute,layout -f sky130 -t HS -c TYP -v 1.0 -l 1.0
+./run_flow.py -h
 ```
-（这里的版本号为1.0）,进行aes_cipher_top设计的全流程running，注意log中有无Error。运行结束后，会打开klayout并显示最终design的版图，如图1所示，滚动鼠标滑轮可以缩放版图，按住“鼠标中键”可以移动版图。在图2中对“Layers”选择hide/show可以隐藏和显示对应的layer层，层数较多时加载会比较慢，可以右键选择“hide all”全部隐藏后，再逐层打开查看。
+即可查看可设置的参数及其参数介绍，如图1所示，顶层脚本的参数设置后，通过查找配置脚本中对应的参数进行匹配，再反馈回顶层脚本，从而运行相对应的流程。
 
 图1：
 
-![image](https://github.com/ll574918628/iFlow-image/blob/master/p1-1.png)
+![输入图片说明](.image%E5%9B%BE%E7%89%871.png)
 
 图2：   
 
